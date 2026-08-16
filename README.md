@@ -80,10 +80,22 @@ To run the real Hugging Face retriever benchmark and record it in W&B:
 ```bash
 python -m pip install -e ".[semantic,tracking,dev]"
 fineval embedding-benchmark --revision 1c82ace116a2629de82404c4be48c0e5d4cf08be
-fineval wandb-run --mode offline
+fineval wandb-run --mode online --entity isk
 ```
 
-The default hash embedding is explicitly a deterministic CI backend, not a semantic model. The benchmark compares BM25, `sentence-transformers/all-MiniLM-L6-v2`, and hybrid retrieval on eight labelled finance queries. Offline W&B runs can be replayed with `wandb sync`; an online/public run requires an authenticated W&B account and `--mode online`.
+The default hash embedding is explicitly a deterministic CI backend, not a semantic model. The benchmark compares BM25, `sentence-transformers/all-MiniLM-L6-v2`, and hybrid retrieval on eight labelled finance queries. Offline W&B runs can be replayed with `wandb sync`; online runs require an authenticated W&B account.
+
+### Published retrieval benchmark
+
+The checked-in [benchmark report](benchmarks/results/minilm_retrieval.json) is reproduced in the public [W&B run `egtj3vi4`](https://wandb.ai/isk/FinEvalKit/runs/egtj3vi4). The model revision, dataset identifier, and retriever-specific metrics are recorded for audit replay.
+
+| Retriever | Recall@3 | MRR | Mean query latency |
+|---|---:|---:|---:|
+| BM25 | 0.875 | 0.604 | 0.030 ms |
+| Hugging Face dense | **1.000** | **0.938** | 13.428 ms |
+| Hybrid RRF | 0.875 | 0.729 | 13.623 ms |
+
+Dense retrieval performed best on this eight-query regression fixture. Hybrid fusion requires further weighting or rank-constant tuning; these small-sample results are not a general performance claim. The corresponding [W&B run summary](benchmarks/results/wandb_run.json) contains the public run identifier and URL but no credentials.
 
 ## Public-filing case study
 
@@ -135,7 +147,7 @@ This is a portfolio-scale evaluation harness, not a production compliance produc
 - the OCR sample is a filing-derived raster fixture, not an original full-page scan
 - the pacs.008 evaluator checks a documented structural profile, not the official ISO 20022 XSD
 - the Hugging Face benchmark has eight documents and requires a one-time model download
-- W&B supports real offline/online runs, but the repository does not claim an unauthenticated public run
+- the published W&B benchmark is one small evaluation run, not production monitoring evidence
 - larger, independently labelled judge-calibration sets with confidence intervals
 - multilingual and cross-border finance cases
 - alert thresholds connected to a production monitoring system

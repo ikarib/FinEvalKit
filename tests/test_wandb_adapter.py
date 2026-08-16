@@ -35,6 +35,7 @@ def test_wandb_tracker_passes_versioned_context_and_finishes(monkeypatch, tmp_pa
     summary = tracker.finish()
 
     assert captured["mode"] == "offline"
+    assert captured["reinit"] == "finish_previous"
     assert captured["config"]["dataset_version"] == "data"
     assert fake_run.logged == [{"event": "evaluation", "score": 0.9}]
     assert fake_run.finished is True

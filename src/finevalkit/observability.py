@@ -71,7 +71,7 @@ class WandbTracker:
             mode=mode,
             dir=str(run_directory),
             tags=list(tags),
-            reinit=True,
+            reinit="finish_previous",
         )
 
     def log(self, context: RunContext, event: str, payload: dict[str, Any]) -> None:

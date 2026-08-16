@@ -22,6 +22,8 @@ fineval embedding-benchmark --revision 1c82ace116a2629de82404c4be48c0e5d4cf08be
 
 The benchmark loads `sentence-transformers/all-MiniLM-L6-v2` from Hugging Face on CPU and compares BM25, dense, and reciprocal-rank-fusion hybrid retrieval using recall@3, mean reciprocal rank, and mean query latency. The checked-in dataset contains eight documents and eight labelled queries, so the results are regression evidence rather than a general performance claim.
 
+The published run produced dense recall@3 of 1.000 and MRR of 0.938, compared with BM25 recall@3 of 0.875 and MRR of 0.604. Hybrid RRF reached recall@3 of 0.875 and MRR of 0.729, showing that fusion parameters need tuning on this fixture. See [W&B run `egtj3vi4`](https://wandb.ai/isk/FinEvalKit/runs/egtj3vi4) and `benchmarks/results/minilm_retrieval.json`.
+
 ## Weights & Biases tracking
 
 Install the tracking extra after creating a benchmark report:
@@ -31,7 +33,7 @@ fineval wandb-run --mode offline
 wandb sync <offline-run-directory>
 ```
 
-The run config records dataset, model, prompt, code, and policy versions. Metrics are logged under retriever-specific keys. Use `--mode online --entity <entity>` with an authenticated W&B account to create a hosted run. FinEvalKit never treats an offline run as public evidence.
+The run config records dataset, model, prompt, code, and policy versions. Metrics are logged under retriever-specific keys. Use `--mode online --entity <entity>` with an authenticated W&B account to create a hosted run. The public benchmark is logged under entity `isk`, project `FinEvalKit`, with run ID `egtj3vi4`.
 
 ## Primary specifications
 

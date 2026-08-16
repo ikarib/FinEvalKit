@@ -1,0 +1,9 @@
+{
+  "mode": "online",
+  "project": "finevalkit",
+  "provider": "Weights & Biases",
+  "run_id": "egtj3vi4",
+  "run_name": "hf-retrieval-benchmark-v1",
+  "sync_command": null,
+  "url": "https://wandb.ai/isk/FinEvalKit/runs/egtj3vi4"
+}

@@ -1,0 +1,28 @@
+{
+  "case_count": 8,
+  "dataset": "financial_retrieval_benchmark_v1",
+  "document_count": 8,
+  "model": {
+    "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+    "provider": "Hugging Face",
+    "revision": "1c82ace116a2629de82404c4be48c0e5d4cf08be"
+  },
+  "results": {
+    "bm25": {
+      "mean_query_latency_ms": 0.03049999997983832,
+      "mean_reciprocal_rank": 0.6041666666666666,
+      "recall_at_3": 0.875
+    },
+    "dense": {
+      "mean_query_latency_ms": 13.427937499898235,
+      "mean_reciprocal_rank": 0.9375,
+      "recall_at_3": 1.0
+    },
+    "hybrid": {
+      "mean_query_latency_ms": 13.622999999938656,
+      "mean_reciprocal_rank": 0.7291666666666666,
+      "recall_at_3": 0.875
+    }
+  },
+  "top_k": 3
+}
