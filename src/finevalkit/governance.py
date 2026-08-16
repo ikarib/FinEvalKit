@@ -5,10 +5,9 @@ from __future__ import annotations
 import hashlib
 import re
 from collections import defaultdict
-from typing import Iterable
+from collections.abc import Iterable
 
 from .models import Chunk
-
 
 PII_PATTERNS = {
     "email": re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.IGNORECASE),
@@ -18,7 +17,11 @@ PII_PATTERNS = {
 
 
 def scan_pii(text: str) -> dict[str, list[str]]:
-    return {name: pattern.findall(text) for name, pattern in PII_PATTERNS.items() if pattern.search(text)}
+    return {
+        name: pattern.findall(text)
+        for name, pattern in PII_PATTERNS.items()
+        if pattern.search(text)
+    }
 
 
 def redact_pii(text: str) -> tuple[str, dict[str, int]]:

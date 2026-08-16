@@ -1,0 +1,2 @@
+{"case_id":"chart-001","modality":"chart","question":"Which fiscal year had the highest total net sales?","expected_answer":"2025","model_answer":"2025","expected_value":416161,"model_value":416161,"unit":"USD millions","source_locator":"net_sales_chart.svg#bar-2025"}
+{"case_id":"chart-002","modality":"chart","question":"How much did total net sales increase from 2024 to 2025?","expected_answer":"25,126 million USD","model_answer":"25,126 million USD","expected_value":25126,"model_value":25126,"unit":"USD millions","source_locator":"net_sales_chart.svg#bar-2024,bar-2025"}

@@ -5,9 +5,7 @@ from finevalkit.annotation import Annotation, agreement_report, cohen_kappa
 
 class AnnotationTests(unittest.TestCase):
     def test_perfect_kappa(self):
-        self.assertEqual(
-            cohen_kappa(["pass", "major_error"], ["pass", "major_error"]), 1.0
-        )
+        self.assertEqual(cohen_kappa(["pass", "major_error"], ["pass", "major_error"]), 1.0)
 
     def test_disagreement_enters_adjudication_queue(self):
         annotations = [

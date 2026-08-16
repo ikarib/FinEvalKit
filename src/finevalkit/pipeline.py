@@ -114,8 +114,10 @@ def _markdown_report(report: dict[str, object]) -> str:
         "",
         f"- Cases: {report['run']['case_count']}",
         f"- Mean score: {summary['mean_case_score']:.3f}",
-        f"- 95% bootstrap CI: [{summary['bootstrap_95_percent_ci'][0]:.3f}, "
-        f"{summary['bootstrap_95_percent_ci'][1]:.3f}]",
+        (
+            f"- 95% bootstrap CI: [{summary['bootstrap_95_percent_ci'][0]:.3f}, "
+            f"{summary['bootstrap_95_percent_ci'][1]:.3f}]"
+        ),
         f"- Cohen's kappa: {annotation['cohen_kappa']:.3f}",
         f"- Agent traces passing policy: {sum(item['passed'] for item in safety)}/{len(safety)}",
         "",
@@ -126,7 +128,9 @@ def _markdown_report(report: dict[str, object]) -> str:
     ]
     for case in report["case_reports"]:
         passed = all(metric["passed"] for metric in case["metrics"])
-        lines.append(f"| {case['case_id']} | {case['mean_score']:.3f} | {'Yes' if passed else 'No'} |")
+        lines.append(
+            f"| {case['case_id']} | {case['mean_score']:.3f} | {'Yes' if passed else 'No'} |"
+        )
     lines.extend(
         [
             "",
@@ -135,8 +139,11 @@ def _markdown_report(report: dict[str, object]) -> str:
             f"- Annotation disagreements: {len(annotation['adjudication_queue'])}",
             f"- Agent policy violations: {sum(item['violation_count'] for item in safety)}",
             "",
-            "This demonstration uses synthetic data and deterministic heuristics. "
-            "The metrics are evaluation instrumentation, not evidence that a model is safe for production.",
+            (
+                "This demonstration uses synthetic data and deterministic heuristics. "
+                "The metrics are evaluation instrumentation, not evidence that a model is safe "
+                "for production."
+            ),
         ]
     )
     return "\n".join(lines) + "\n"

@@ -1,0 +1,5 @@
+concept,period,unit,scale,raw_value,source_locator
+RevenueFromContractWithCustomerExcludingAssessedTax,2025-09-27,USD,1000000,"416,161",2025-10-K:p28:r-total-net-sales:c-2025
+NetIncomeLoss,2025-09-27,USD,1000000,"112,010",2025-10-K:p28:r-net-income:c-2025
+OperatingIncomeLoss,2025-09-27,USD,1000000,"133,050",2025-10-K:p28:r-operating-income:c-2025
+Assets,2025-09-27,USD,1000000,"359,241",2025-10-K:p27:r-total-assets:c-2025

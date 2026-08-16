@@ -39,9 +39,7 @@ class EvaluationTests(unittest.TestCase):
 
     def test_word_error_rate_and_bootstrap_are_deterministic(self):
         self.assertEqual(word_error_rate("a b c d", "a b x d"), 0.25)
-        self.assertEqual(
-            bootstrap_mean_ci([0.2, 0.4, 0.8]), bootstrap_mean_ci([0.2, 0.4, 0.8])
-        )
+        self.assertEqual(bootstrap_mean_ci([0.2, 0.4, 0.8]), bootstrap_mean_ci([0.2, 0.4, 0.8]))
 
 
 if __name__ == "__main__":

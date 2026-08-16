@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" role="img" aria-labelledby="title desc">
+  <title id="title">Apple total net sales, fiscal years 2023 to 2025</title>
+  <desc id="desc">Bars show 383285, 391035, and 416161 million US dollars.</desc>
+  <rect width="720" height="420" fill="#ffffff"/>
+  <text x="360" y="34" text-anchor="middle" font-family="sans-serif" font-size="20">Total net sales (USD millions)</text>
+  <line x1="85" y1="350" x2="675" y2="350" stroke="#27364b" stroke-width="2"/>
+  <rect x="140" y="121" width="110" height="229" fill="#6f88a8"/>
+  <rect x="305" y="116" width="110" height="234" fill="#4f729c"/>
+  <rect x="470" y="101" width="110" height="249" fill="#225ea8"/>
+  <g font-family="sans-serif" font-size="15" text-anchor="middle" fill="#1d2733">
+    <text x="195" y="372">2023</text><text x="195" y="112">383,285</text>
+    <text x="360" y="372">2024</text><text x="360" y="107">391,035</text>
+    <text x="525" y="372">2025</text><text x="525" y="92">416,161</text>
+  </g>
+  <text x="360" y="405" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#586575">Source: Apple Inc. 2025 Form 10-K, p. 28; SEC EDGAR</text>
+</svg>

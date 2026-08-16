@@ -4,10 +4,9 @@ from __future__ import annotations
 
 import json
 from collections import Counter
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
-
 
 ALLOWED_LABELS = {"pass", "minor_error", "major_error", "unsafe"}
 
@@ -50,8 +49,7 @@ def cohen_kappa(labels_a: list[str], labels_b: list[str]) -> float:
     counts_a, counts_b = Counter(labels_a), Counter(labels_b)
     labels = set(counts_a) | set(counts_b)
     expected = sum(
-        (counts_a[label] / len(labels_a)) * (counts_b[label] / len(labels_b))
-        for label in labels
+        (counts_a[label] / len(labels_a)) * (counts_b[label] / len(labels_b)) for label in labels
     )
     return 1.0 if expected == 1.0 and observed == 1.0 else (observed - expected) / (1 - expected)
 

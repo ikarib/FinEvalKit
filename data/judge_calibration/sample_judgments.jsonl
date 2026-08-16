@@ -1,0 +1,12 @@
+{"case_id":"judge-001","human_label":"pass","judge_label":"pass","confidence":0.96,"risk":"standard","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-002","human_label":"citation_error","judge_label":"citation_error","confidence":0.91,"risk":"high","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-003","human_label":"numeric_error","judge_label":"numeric_error","confidence":0.94,"risk":"high","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-004","human_label":"unsupported","judge_label":"unsupported","confidence":0.88,"risk":"standard","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-005","human_label":"pass","judge_label":"pass","confidence":0.84,"risk":"standard","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-006","human_label":"numeric_error","judge_label":"unsupported","confidence":0.67,"risk":"high","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-007","human_label":"unsupported","judge_label":"unsupported","confidence":0.79,"risk":"standard","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-008","human_label":"citation_error","judge_label":"citation_error","confidence":0.89,"risk":"standard","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-009","human_label":"pass","judge_label":"pass","confidence":0.93,"risk":"high","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-010","human_label":"numeric_error","judge_label":"numeric_error","confidence":0.86,"risk":"high","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-011","human_label":"unsupported","judge_label":"pass","confidence":0.72,"risk":"high","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}
+{"case_id":"judge-012","human_label":"pass","judge_label":"pass","confidence":0.77,"risk":"standard","judge_model":"offline-fixture","prompt_version":"judge-rubric-v1"}

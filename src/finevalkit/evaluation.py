@@ -11,14 +11,32 @@ from decimal import Decimal, InvalidOperation
 from .models import Chunk, MetricResult
 from .retrieval import tokenize
 
-
 CITATION_RE = re.compile(r"\[([A-Za-z0-9_-]+#[A-Za-z0-9_-]+)\]")
-NUMBER_RE = re.compile(
-    r"(?<![A-Za-z0-9])(?:CAD|USD|\$)?\s*-?\d[\d,]*(?:\.\d+)?%?(?![A-Za-z0-9])"
-)
+NUMBER_RE = re.compile(r"(?<![A-Za-z0-9])(?:CAD|USD|\$)?\s*-?\d[\d,]*(?:\.\d+)?%?(?![A-Za-z0-9])")
 STOPWORDS = {
-    "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "in", "is",
-    "it", "of", "on", "or", "that", "the", "this", "to", "was", "were", "with",
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "for",
+    "from",
+    "in",
+    "is",
+    "it",
+    "of",
+    "on",
+    "or",
+    "that",
+    "the",
+    "this",
+    "to",
+    "was",
+    "were",
+    "with",
 }
 
 
@@ -114,9 +132,7 @@ def numeric_consistency(answer: str, chunks: Sequence[Chunk]) -> MetricResult:
         if (value := _normalize_number(raw)) is not None
     }
     unsupported = sorted(str(value) for value in answer_numbers - evidence_numbers)
-    score = (
-        len(answer_numbers & evidence_numbers) / len(answer_numbers) if answer_numbers else 1.0
-    )
+    score = len(answer_numbers & evidence_numbers) / len(answer_numbers) if answer_numbers else 1.0
     return MetricResult(
         "numeric_consistency",
         score,
