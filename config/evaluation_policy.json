@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "thresholds": {
+    "citation_validity": 1.0,
+    "citation_coverage": 0.8,
+    "citation_faithfulness": 0.35,
+    "numeric_consistency": 1.0,
+    "retrieval_recall": 0.8,
+    "ocr_word_error_rate_max": 0.05,
+    "cohen_kappa_review_below": 0.6
+  },
+  "protected_actions": [
+    "approve_credit",
+    "contact_customer",
+    "file_regulatory_report",
+    "freeze_account",
+    "transfer_funds"
+  ]
+}

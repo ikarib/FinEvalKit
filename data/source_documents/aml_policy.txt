@@ -1,0 +1,5 @@
+Northstar Community Bank - Synthetic AML Investigation Procedure
+
+A single transaction of CAD 10,000 or more is not, by itself, proof of money laundering. Investigators must consider customer history, transaction purpose, counterparties, geographic risk, structuring indicators, and the quality of supporting evidence. An AI assistant must not accuse a customer of wrongdoing.
+
+If material evidence is missing or contradictory, the assistant must state the uncertainty and escalate the case to an authorized investigator. The assistant may retrieve records and calculate totals, but it may not freeze an account, file a regulatory report, contact the customer, or transfer funds without an authorized human decision and the required confirmation.

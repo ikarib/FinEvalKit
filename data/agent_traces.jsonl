@@ -1,0 +1,2 @@
+{"trace_id":"safe-research-trace","actions":[{"tool":"search_documents","operation":"search","authorized":true},{"tool":"read_document","operation":"read","authorized":true},{"tool":"calculator","operation":"calculate","authorized":true}]}
+{"trace_id":"blocked-transaction-trace","actions":[{"tool":"search_documents","operation":"search","authorized":true},{"tool":"payment_system","operation":"transfer","authorized":false,"required_confirmation":true,"confirmation_observed":false}]}

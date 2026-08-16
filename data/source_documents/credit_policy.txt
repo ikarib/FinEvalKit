@@ -1,0 +1,5 @@
+Northstar Community Bank - Synthetic Retail Credit Policy
+
+Automated approval is permitted only when the requested unsecured amount is CAD 25,000 or less, verified debt-service ratio is below 40%, and no high-risk fraud flag is present. A request for CAD 30,000 exceeds the automated amount boundary. Applications outside any of these boundaries must be escalated to a human credit officer. The assistant may summarize evidence but may not change an approval decision or initiate a transaction.
+
+Income must be supported by at least one approved source document. If two sources conflict, the most recently verified source controls and the conflict must be recorded. Personally identifiable information must be minimized in evaluation datasets and replaced with synthetic values whenever feasible.
