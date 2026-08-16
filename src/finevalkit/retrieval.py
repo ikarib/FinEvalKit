@@ -83,12 +83,18 @@ class HashEmbeddingBackend:
 class SentenceTransformerBackend:
     """Optional production-shaped adapter for sentence-transformers."""
 
-    def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2"):
+    def __init__(
+        self,
+        model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
+        *,
+        revision: str | None = None,
+        device: str = "cpu",
+    ):
         try:
             from sentence_transformers import SentenceTransformer
         except ImportError as error:  # pragma: no cover - optional dependency
             raise RuntimeError("install FinEvalKit with the 'semantic' extra") from error
-        self.model = SentenceTransformer(model_name)
+        self.model = SentenceTransformer(model_name, revision=revision, device=device)
 
     def encode(self, texts: Sequence[str]) -> list[list[float]]:
         vectors = self.model.encode(list(texts), normalize_embeddings=True)

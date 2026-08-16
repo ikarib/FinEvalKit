@@ -8,7 +8,7 @@
 
 FinEvalKit is a compact, reproducible portfolio project showing how to turn financial filings, policies, and mixed-document evidence into measurable AI evaluation specifications. It separates retrieval, grounding, numerical consistency, annotation quality, OCR quality, privacy, leakage, judge calibration, monitoring, and agent authorization so an aggregate score cannot hide a high-risk failure.
 
-The repository combines synthetic policy cases with a small, attributed fixture derived from Apple Inc.'s public 2025 Form 10-K and SEC XBRL data. Both demonstrations are deterministic and require no LLM API or network access.
+The repository combines synthetic policy cases with attributed fixtures derived from Apple Inc.'s 2025 Form 10-K and Infosys Limited's 2025 IFRS Form 20-F. Its deterministic demonstrations require no LLM API or network access; optional commands exercise a pinned Hugging Face embedding model and Weights & Biases tracking.
 
 ## What it demonstrates
 
@@ -16,13 +16,13 @@ The repository combines synthetic policy cases with a small, attributed fixture 
 |---|---|
 | Financial dataset design | Versioned cases, labels, evidence citations, thresholds, and acceptance logic |
 | Annotation operations | Written guidelines, independent labels, Cohen's kappa, and adjudication queue |
-| Financial-document ingestion | Source hashes, page/chunk provenance, optional PDF extraction, XBRL Company Facts parsing, and OCR routing |
+| Financial-document ingestion | Source hashes, page/chunk provenance, optional PDF extraction, SEC US-GAAP and IFRS Company Facts parsing, and real Tesseract OCR |
 | Source-grounded RAG evaluation | BM25, pluggable dense embeddings, hybrid reciprocal-rank fusion, recall, citations, and faithfulness |
 | Numerical reliability | Decimal-normalized answers plus table-to-XBRL reconciliation with sign/scale/value errors |
-| Multimodal/OCR quality | WER, critical numeric OCR errors, chart-QA scoring, and visual source locators |
+| Multimodal/OCR quality | Reproducible scanned-table fixture, Tesseract inference, WER, critical numeric OCR errors, chart-QA scoring, and visual source locators |
 | Automated-judge validation | Human-gold confusion matrix, macro-F1, Cohen's kappa, and risk-based review queue |
 | Monitoring and observability | Modality/workflow slices, bootstrap intervals, PSI drift, and versioned JSONL run events |
-| Agentic evaluation | Tool allowlists, authorization boundaries, escalation, and confirmation checks |
+| Agentic evaluation | Tool allowlists plus ISO 20022 pacs.008 structural parsing, authorization boundaries, escalation, and confirmation checks |
 | Governance | PII scanning/redaction, leakage checks, data card, risk note, and residual limitations |
 | Statistical defensibility | Bootstrap confidence intervals and inter-annotator agreement |
 
@@ -37,6 +37,9 @@ flowchart TD
     E["Human annotations"] --> F["Agreement + adjudication"]
     E --> J["Automated-judge calibration"]
     G["Agent traces"] --> H["Authorization checks"]
+    P["ISO 20022 pacs.008"] --> H
+    O["Scanned filing image"] --> T["Tesseract OCR + numeric checks"]
+    T --> D
     D --> I["Audit report"]
     F --> I
     J --> I
@@ -53,6 +56,7 @@ python -m pip install -e ".[dev]"
 pytest
 fineval demo --output-dir artifacts
 fineval v2-demo --output-dir artifacts-v2
+fineval v3-demo --output-dir artifacts-v3
 ```
 
 The run writes:
@@ -61,6 +65,7 @@ The run writes:
 - `artifacts/evaluation_report.md`: concise stakeholder summary
 - `artifacts-v2/v2_evaluation_report.json`: filing, table, chart, judge, retrieval, and monitoring evidence
 - `artifacts-v2/experiment_events.jsonl`: dataset/model/prompt/code-versioned run event
+- `artifacts-v3/v3_evaluation_report.json`: OCR, IFRS/XBRL, and ISO 20022 evidence
 
 To enable PDF extraction:
 
@@ -68,21 +73,23 @@ To enable PDF extraction:
 python -m pip install -e ".[pdf,dev]"
 ```
 
-PDF pages with insufficient extracted text are marked `ocr_required`; a production implementation can route them to a controlled OCR service and then use the included word-error-rate metric on a labelled sample.
+PDF pages with insufficient extracted text are marked `ocr_required`. The v0.3 demonstration runs the local Tesseract executable against a reproducibly generated scanned financial table and records the engine version, image SHA-256, word error rate, and critical numeric error rate.
 
-To plug in a real semantic retriever or W&B tracking backend:
+To run the real Hugging Face retriever benchmark and record it in W&B:
 
 ```bash
 python -m pip install -e ".[semantic,tracking,dev]"
+fineval embedding-benchmark --revision 1c82ace116a2629de82404c4be48c0e5d4cf08be
+fineval wandb-run --mode offline
 ```
 
-The default hash embedding is explicitly a deterministic CI backend, not a semantic model.
+The default hash embedding is explicitly a deterministic CI backend, not a semantic model. The benchmark compares BM25, `sentence-transformers/all-MiniLM-L6-v2`, and hybrid retrieval on eight labelled finance queries. Offline W&B runs can be replayed with `wandb sync`; an online/public run requires an authenticated W&B account and `--mode online`.
 
 ## Public-filing case study
 
-The reduced fixture reconciles four Apple 2025 Form 10-K values—including total net sales and net income—from a rendered statement table to SEC-compatible Company Facts records. It also includes an accessible SVG chart and chart-QA outputs with visual provenance. See the [public-filing case study](docs/public_filing_case_study.md).
+The reduced fixtures reconcile four Apple US-GAAP Form 10-K values and three Infosys IFRS Form 20-F values from statement tables to SEC-compatible Company Facts records. The v0.3 case also runs OCR over a scanned filing-derived table. See the [public-filing case study](docs/public_filing_case_study.md) and [v0.3 workflow notes](docs/v3_workflows.md).
 
-Primary sources: [SEC EDGAR API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) and [Apple 2025 Form 10-K](https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm).
+Primary sources: [SEC EDGAR API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces), [Apple 2025 Form 10-K](https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm), [Infosys 2025 Form 20-F](https://www.sec.gov/Archives/edgar/data/1067491/000095017025091925/infy-20250331.htm), and the [ISO 20022 message catalogue](https://www.iso20022.org/catalogue-messages).
 
 ## Evaluation design
 
@@ -122,11 +129,13 @@ See [annotation guidelines](docs/annotation_guidelines.md), the [data card](docs
 
 ## Limitations and next steps
 
-This is a portfolio-scale evaluation harness, not a production compliance product. Useful extensions include:
+This is a portfolio-scale evaluation harness, not a production compliance product. Residual limitations include:
 
 - issuer-diverse, time-split filing datasets and taxonomy-extension mapping
-- end-to-end PDF rasterization plus OCR/VLM inference (the toolkit currently scores supplied outputs)
-- a real embedding-model benchmark using the provided adapter
+- the OCR sample is a filing-derived raster fixture, not an original full-page scan
+- the pacs.008 evaluator checks a documented structural profile, not the official ISO 20022 XSD
+- the Hugging Face benchmark has eight documents and requires a one-time model download
+- W&B supports real offline/online runs, but the repository does not claim an unauthenticated public run
 - larger, independently labelled judge-calibration sets with confidence intervals
 - multilingual and cross-border finance cases
 - alert thresholds connected to a production monitoring system

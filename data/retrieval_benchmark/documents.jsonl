@@ -1,0 +1,8 @@
+{"document_id":"apple-10k","chunk_id":"revenue","text":"Apple reported total net sales of 416.161 billion US dollars for fiscal 2025, including products and services.","page":28,"modality":"filing_text"}
+{"document_id":"apple-10k","chunk_id":"income","text":"Apple reported fiscal 2025 operating income of 133.050 billion US dollars and net income of 112.010 billion.","page":28,"modality":"filing_text"}
+{"document_id":"infosys-20f","chunk_id":"revenue","text":"Infosys fiscal 2025 revenues were 19.277 billion US dollars under IFRS reporting.","page":117,"modality":"filing_text"}
+{"document_id":"infosys-20f","chunk_id":"profit","text":"Infosys earned net profit of 3.162 billion US dollars in fiscal 2025 under IFRS.","page":117,"modality":"filing_text"}
+{"document_id":"credit-policy","chunk_id":"approval","text":"Unsecured applications above CAD 25,000 require authorization from a human credit officer before approval.","page":1,"modality":"policy"}
+{"document_id":"aml-policy","chunk_id":"threshold","text":"A transaction amount alone does not prove money laundering; investigators must review context and uncertainty.","page":1,"modality":"policy"}
+{"document_id":"payments-policy","chunk_id":"confirmation","text":"High-value payment instructions require both prior authorization and explicit confirmation before execution.","page":1,"modality":"policy"}
+{"document_id":"model-risk","chunk_id":"monitoring","text":"Production model monitoring compares modality and workflow slices and reviews material distribution shifts.","page":1,"modality":"governance"}

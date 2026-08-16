@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" role="img" aria-labelledby="title desc">
+  <title id="title">Filing-derived statement raster source</title>
+  <desc id="desc">Selected Apple 2025 Form 10-K statement values used for OCR evaluation.</desc>
+  <rect width="1600" height="1000" fill="#fdfdfb"/>
+  <g font-family="DejaVu Sans" fill="#161616">
+    <text x="800" y="105" text-anchor="middle" font-size="46" font-weight="bold">APPLE INC.</text>
+    <text x="800" y="165" text-anchor="middle" font-size="35">CONSOLIDATED STATEMENTS OF OPERATIONS</text>
+    <text x="800" y="215" text-anchor="middle" font-size="28">USD millions - Fiscal year 2025</text>
+    <line x1="180" y1="270" x2="1420" y2="270" stroke="#222" stroke-width="3"/>
+    <g font-size="36">
+      <text x="230" y="360">Total net sales</text><text x="1350" y="360" text-anchor="end">416,161</text>
+      <text x="230" y="470">Operating income</text><text x="1350" y="470" text-anchor="end">133,050</text>
+      <text x="230" y="580">Net income</text><text x="1350" y="580" text-anchor="end">112,010</text>
+    </g>
+    <line x1="180" y1="640" x2="1420" y2="640" stroke="#222" stroke-width="3"/>
+    <text x="800" y="735" text-anchor="middle" font-size="25">Source: Apple Inc. 2025 Form 10-K, page 28; SEC EDGAR</text>
+    <text x="800" y="790" text-anchor="middle" font-size="22">Rasterized evaluation fixture - not the complete filing page</text>
+  </g>
+</svg>

@@ -9,3 +9,5 @@ build/
 artifacts/*.json
 artifacts/*.md
 !artifacts/.gitkeep
+artifacts/wandb/
+wandb/

@@ -41,3 +41,14 @@ The SVG chart is derived from the same filing values and includes text alternati
 ## Model-risk considerations
 
 Issuer extensions, amended filings, duplicate facts, fiscal calendars, decimals, and rendering artifacts can create silent errors. The parser deduplicates repeated fact keys by the latest filing date, but a production pipeline should preserve the full fact history and validate issuer-specific taxonomy mappings. The four-fact fixture proves the evaluation path, not generalization across issuers.
+
+## IFRS and OCR extension
+
+FinEvalKit v0.3 adds a second issuer and taxonomy:
+
+- Issuer: Infosys Limited (CIK 0001067491)
+- Filing: 2025 Form 20-F, accession 0000950170-25-091925
+- Filing source: <https://www.sec.gov/Archives/edgar/data/1067491/000095017025091925/infy-20250331.htm>
+- Concepts: `ifrs-full:Revenue`, `ifrs-full:ProfitLossFromOperatingActivities`, and `ifrs-full:ProfitLoss`
+
+The corresponding statement-table fixture is rendered to a PNG by `scripts/generate_ocr_fixture.py`. The v0.3 pipeline invokes Tesseract itself, records the executable version and image SHA-256, and evaluates the transcription against a checked-in gold file. This demonstrates an executable OCR control path while avoiding the false claim that one generated raster represents the variety of original scanned filings.

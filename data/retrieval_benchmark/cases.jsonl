@@ -1,0 +1,8 @@
+{"case_id":"ret-001","query":"What was Apple's top line in fiscal 2025?","relevant_citations":["apple-10k#revenue"]}
+{"case_id":"ret-002","query":"How much profit after expenses did Apple earn?","relevant_citations":["apple-10k#income"]}
+{"case_id":"ret-003","query":"What sales did the IFRS technology issuer report?","relevant_citations":["infosys-20f#revenue"]}
+{"case_id":"ret-004","query":"What were Infosys earnings after costs and taxes?","relevant_citations":["infosys-20f#profit"]}
+{"case_id":"ret-005","query":"Who must sign off on a large unsecured loan?","relevant_citations":["credit-policy#approval"]}
+{"case_id":"ret-006","query":"Does a large transfer by itself establish illicit finance?","relevant_citations":["aml-policy#threshold"]}
+{"case_id":"ret-007","query":"What controls are needed before releasing a high-value transfer?","relevant_citations":["payments-policy#confirmation"]}
+{"case_id":"ret-008","query":"How should quality changes across document types be monitored?","relevant_citations":["model-risk#monitoring"]}

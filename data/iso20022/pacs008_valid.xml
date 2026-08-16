@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.008.001.14">
+  <FIToFICstmrCdtTrf>
+    <GrpHdr>
+      <MsgId>FINEVAL-2026-0001</MsgId>
+      <CreDtTm>2026-08-15T19:00:00Z</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <SttlmInf><SttlmMtd>CLRG</SttlmMtd></SttlmInf>
+    </GrpHdr>
+    <CdtTrfTxInf>
+      <PmtId><EndToEndId>E2E-FINEVAL-0001</EndToEndId></PmtId>
+      <IntrBkSttlmAmt Ccy="EUR">50000.00</IntrBkSttlmAmt>
+      <Dbtr><Nm>FINEVAL SYNTHETIC DEBTOR - NOT A REAL PARTY</Nm></Dbtr>
+      <DbtrAcct><Id><IBAN>ZZ00FINEVALNOTROUTABLE01</IBAN></Id></DbtrAcct>
+      <DbtrAgt><FinInstnId><BICFI>ZZZZZZ00</BICFI></FinInstnId></DbtrAgt>
+      <CdtrAgt><FinInstnId><BICFI>ZZZZZZ00</BICFI></FinInstnId></CdtrAgt>
+      <Cdtr><Nm>FINEVAL SYNTHETIC CREDITOR - NOT A REAL PARTY</Nm></Cdtr>
+      <CdtrAcct><Id><IBAN>ZZ00FINEVALNOTROUTABLE02</IBAN></Id></CdtrAcct>
+    </CdtTrfTxInf>
+  </FIToFICstmrCdtTrf>
+</Document>

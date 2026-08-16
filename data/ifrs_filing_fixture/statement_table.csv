@@ -1,0 +1,4 @@
+concept,period,unit,scale,raw_value,source_locator
+Revenue,2025-03-31,USD,1000000,"19,277",2025-20-F:income-statement:r-revenues:c-2025
+ProfitLossFromOperatingActivities,2025-03-31,USD,1000000,"4,071",2025-20-F:income-statement:r-operating-profit:c-2025
+ProfitLoss,2025-03-31,USD,1000000,"3,162",2025-20-F:income-statement:r-net-profit:c-2025

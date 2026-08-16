@@ -1,0 +1,68 @@
+{
+  "cik": 1067491,
+  "entityName": "Infosys Limited",
+  "source": {
+    "filing": "https://www.sec.gov/Archives/edgar/data/1067491/000095017025091925/infy-20250331.htm",
+    "accession": "0000950170-25-091925",
+    "accounting_standard": "IFRS as issued by the IASB",
+    "note": "Reduced educational fixture derived from a public SEC Form 20-F; values are USD."
+  },
+  "facts": {
+    "ifrs-full": {
+      "Revenue": {
+        "label": "Revenues",
+        "units": {
+          "USD": [
+            {
+              "start": "2024-04-01",
+              "end": "2025-03-31",
+              "val": 19277000000,
+              "accn": "0000950170-25-091925",
+              "fy": 2025,
+              "fp": "FY",
+              "form": "20-F",
+              "filed": "2025-07-01",
+              "filing_url": "https://www.sec.gov/Archives/edgar/data/1067491/000095017025091925/infy-20250331.htm"
+            }
+          ]
+        }
+      },
+      "ProfitLoss": {
+        "label": "Net profit",
+        "units": {
+          "USD": [
+            {
+              "start": "2024-04-01",
+              "end": "2025-03-31",
+              "val": 3162000000,
+              "accn": "0000950170-25-091925",
+              "fy": 2025,
+              "fp": "FY",
+              "form": "20-F",
+              "filed": "2025-07-01",
+              "filing_url": "https://www.sec.gov/Archives/edgar/data/1067491/000095017025091925/infy-20250331.htm"
+            }
+          ]
+        }
+      },
+      "ProfitLossFromOperatingActivities": {
+        "label": "Operating profit",
+        "units": {
+          "USD": [
+            {
+              "start": "2024-04-01",
+              "end": "2025-03-31",
+              "val": 4071000000,
+              "accn": "0000950170-25-091925",
+              "fy": 2025,
+              "fp": "FY",
+              "form": "20-F",
+              "filed": "2025-07-01",
+              "filing_url": "https://www.sec.gov/Archives/edgar/data/1067491/000095017025091925/infy-20250331.htm"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

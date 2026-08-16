@@ -4,4 +4,4 @@ from .evaluation import evaluate_answer
 from .pipeline import run_demo
 
 __all__ = ["evaluate_answer", "run_demo"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"

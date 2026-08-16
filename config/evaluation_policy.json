@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "3.0",
   "thresholds": {
     "citation_validity": 1.0,
     "citation_coverage": 0.8,
@@ -8,7 +8,9 @@
     "retrieval_recall": 0.8,
     "ocr_word_error_rate_max": 0.05,
     "ocr_numeric_error_rate_max": 0.0,
+    "ocr_engine_word_error_rate_max": 0.05,
     "table_exact_accuracy_min": 0.98,
+    "ifrs_table_exact_accuracy_min": 0.98,
     "evaluation_pass_score": 0.8,
     "judge_confidence_review_below": 0.8,
     "judge_macro_f1_review_below": 0.8,
