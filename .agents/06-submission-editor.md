@@ -14,20 +14,12 @@ Prepare or review:
   approximate runtime, and cost;
 - five-minute video outline: problem, baseline, one end-to-end run, comparison,
   largest successful change, and one removed experiment;
-- trajectory manifest: all complete contributing session histories
+- trajectory manifest: preserve all complete Codex session histories that
+  materially contributed to the final submission. Export each session in
+  ATIF-compatible form and retain the original JSONL locally as source evidence.
+  The manifest may identify representative sessions for easier review, but must
+  not replace the complete histories. Preserve failed attempts, retries,
+  debugging, rejected experiments, feedback, and human checkpoints.
 
 Flag unsupported wording, missing raw artifacts, and missing disclosures. Use
 plain language and report limitations close to the affected claim.
-
-## Trajectory submission
-
-Preserve and submit all complete Codex session histories that materially
-contributed to the final entry, not only representative successful sessions.
-
-Export each session to ATIF-compatible form while retaining the original
-Codex JSONL as immutable source evidence. Do not omit failed attempts,
-debugging sessions, retries, rejected experiments, or corrective sessions
-that contributed materially to the submitted solution.
-
-A manifest may identify representative sessions for navigation, but it must
-not replace the complete session-history submission.

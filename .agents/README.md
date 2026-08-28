@@ -33,8 +33,21 @@ accepted change, and record rejected experiments as well as successful ones.
 - Before editing, inspect the existing repository and state the files you plan
   to change. Run relevant checks after each change.
 
-## Trajectory minimum
+## Trajectory requirements
 
-For each role, save the initial prompt, inputs, tool calls and outputs, retry or
-failure details, human checkpoints, and final handoff. Redact keys, personal
-data, and unnecessary local paths.
+Preserve all complete coding-agent sessions that materially contribute to the
+submission. Do not cherry-pick only successful or representative sessions.
+
+For each session preserve:
+
+- initial prompt and relevant instructions;
+- agent messages;
+- tool calls and outputs;
+- failures and retries;
+- feedback and corrections;
+- human checkpoints;
+- final handoff.
+
+Export submission trajectories in ATIF-compatible form. Keep original Codex
+JSONL locally as immutable evidence. A manifest may identify representative
+sessions for navigation without excluding the remaining complete histories.
