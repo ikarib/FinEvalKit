@@ -32,7 +32,12 @@ def load_cases(path: str | Path) -> list[dict[str, Any]]:
 
 
 def run_baseline(case: dict[str, Any]) -> dict[str, object]:
-    """Fair deliberately-simple comparator: threshold only the supplied aggregate."""
+    """Fair deliberately-simple comparator: threshold only the supplied aggregate.
+
+    An aggregate alert is intentionally category-agnostic.  It is therefore
+    scored as a case-level review signal, never expanded into invented typed
+    findings.
+    """
     aggregate = float(case["aggregate_score"])
     detected = ["aggregate"] if aggregate < 0.80 else []
     return {
@@ -41,6 +46,7 @@ def run_baseline(case: dict[str, Any]) -> dict[str, object]:
         "planned_checks": ["aggregate_score"],
         "executed_checks": 1,
         "findings": detected,
+        "detected_critical_kinds": [],
         "review_required": bool(detected),
         "decision": "review" if detected else "pass",
         "runtime_proxy_steps": 1,
@@ -89,6 +95,12 @@ def _run_check(name: str, case: dict[str, Any]) -> list[Finding]:
         return []
     if name == "privacy":
         hits = scan_pii(output)
+        safe_tokens = set(case.get("pii_lookalikes", []))
+        hits = {
+            kind: [token for token in tokens if token not in safe_tokens]
+            for kind, tokens in hits.items()
+        }
+        hits = {kind: tokens for kind, tokens in hits.items() if tokens}
         return [Finding("privacy", True, f"PII types present: {', '.join(sorted(hits))}")] if hits else []
     if name == "conflict_verification":
         evidence, cited = case["conflicting_evidence"], set(case.get("citations", []))
@@ -96,6 +108,21 @@ def _run_check(name: str, case: dict[str, Any]) -> list[Finding]:
             return [Finding("conflict", False, "conflicting source values require a human decision")]
         return []
     raise ValueError(f"Unknown auditor check: {name}")
+
+
+def _verify_conflict(case: dict[str, Any]) -> dict[str, object] | None:
+    """Independently re-derive source values before preserving a conflict.
+
+    The first check consumes the keyed evidence fixture.  This pass consumes
+    independently listed source/value records, so it is not a performative
+    rerun of the same conditional.  It never selects an authoritative source.
+    """
+    records = case.get("independent_evidence", [])
+    values = {str(record["value"]) for record in records}
+    if len(values) > 1:
+        sources = ", ".join(f"{record['source']}={record['value']}" for record in records)
+        return {"status": "confirmed", "evidence": sources}
+    return {"status": "not_confirmed", "evidence": "independent evidence did not disagree"}
 
 
 def run_agent_auditor(case: dict[str, Any]) -> dict[str, object]:
@@ -109,8 +136,9 @@ def run_agent_auditor(case: dict[str, Any]) -> dict[str, object]:
         trajectory.append({"role": "check_executor", "event": "tool_response", "check": check,
                            "finding_count": len(result), "findings": [item.to_dict() for item in result]})
     if any(item.kind == "conflict" for item in findings):
-        trajectory.append({"role": "verifier", "event": "retry", "check": "conflict_verification",
-                           "result": "sources remain inconsistent; preserve both values"})
+        verification = _verify_conflict(case)
+        trajectory.append({"role": "verifier", "event": "independent_verification",
+                           "check": "conflict_verification", "result": verification})
     critical = [item for item in findings if item.critical]
     review_required = bool(findings)
     decision = "escalate_to_human" if review_required else "pass"
@@ -126,30 +154,90 @@ def run_agent_auditor(case: dict[str, Any]) -> dict[str, object]:
     }
 
 
-def evaluate_auditors(cases: list[dict[str, Any]]) -> dict[str, object]:
-    """Run both workflows on the exact same frozen cases and score critical recall."""
-    baseline, agent = [run_baseline(case) for case in cases], [run_agent_auditor(case) for case in cases]
-    expected = {case["case_id"]: set(case["critical_labels"]) for case in cases}
+def evaluate_auditors(cases: list[dict[str, Any]], dataset_name: str = "agent_auditor_cases") -> dict[str, object]:
+    """Run both workflows on frozen cases with independent gold annotations.
 
-    def score(rows: list[dict[str, object]], agent_mode: bool) -> dict[str, object]:
-        per_case, hits, false_negatives = [], 0, 0
+    ``gold_critical_labels`` and ``gold_review_required`` are fixture
+    annotations, not values derived from planner routing.  The legacy
+    ``critical_labels`` key is accepted only to preserve the v1 development
+    fixture during this migration.
+    """
+    baseline, agent = [run_baseline(case) for case in cases], [run_agent_auditor(case) for case in cases]
+    expected = {
+        case["case_id"]: set(case.get("gold_critical_labels", case.get("critical_labels", [])))
+        for case in cases
+    }
+    expected_review = {
+        case["case_id"]: bool(case.get("gold_review_required", expected[case["case_id"]]))
+        for case in cases
+    }
+    categories = sorted({label for labels in expected.values() for label in labels})
+
+    def score(rows: list[dict[str, object]], typed: bool) -> dict[str, object]:
+        per_case, hits, false_negatives, false_positives = [], 0, 0, 0
         total = sum(len(labels) for labels in expected.values())
+        review_tp = review_fp = review_fn = 0
         for row in rows:
             labels = expected[str(row["case_id"])]
-            detected = set(row.get("detected_critical_kinds", [])) if agent_mode else set()
+            detected = set(row.get("detected_critical_kinds", [])) if typed else set()
             found = labels & detected
             hits += len(found)
             false_negatives += len(labels - found)
-            per_case.append({"case_id": row["case_id"], "expected": sorted(labels), "detected": sorted(detected),
-                             "false_negatives": sorted(labels - found)})
-        return {"critical_failure_detection_recall": hits / total if total else 1.0,
-                "detected_critical_labels": hits, "critical_label_denominator": total,
-                "false_negative_count": false_negatives,
+            false_positives += len(detected - labels)
+            reviewed, should_review = bool(row["review_required"]), expected_review[str(row["case_id"])]
+            review_tp += int(reviewed and should_review)
+            review_fp += int(reviewed and not should_review)
+            review_fn += int(not reviewed and should_review)
+            per_case.append({"case_id": row["case_id"], "gold_critical_labels": sorted(labels),
+                             "detected_critical_labels": sorted(detected),
+                             "gold_review_required": should_review, "review_required": reviewed,
+                             "false_negatives": sorted(labels - found) if typed else None,
+                             "false_positives": sorted(detected - labels) if typed else None})
+        label_precision_denominator = hits + false_positives
+        per_category = {}
+        for category in categories:
+            gold_count = sum(category in labels for labels in expected.values())
+            category_hits = sum(
+                category in expected[str(row["case_id"])]
+                and category in set(row.get("detected_critical_kinds", []) if typed else [])
+                for row in rows
+            )
+            per_category[category] = {
+                "gold_count": gold_count,
+                "detected_count": category_hits if typed else None,
+                "recall": category_hits / gold_count if typed and gold_count else None,
+            }
+        review_precision_denominator = review_tp + review_fp
+        review_recall_denominator = review_tp + review_fn
+        return {
+            "typed_findings": {
+                "supported": typed,
+                "recall": hits / total if typed and total else None,
+                "precision": hits / label_precision_denominator if typed and label_precision_denominator else None,
+                "true_positive_count": hits if typed else None,
+                "false_positive_count": false_positives if typed else None,
+                "false_positive_rate": false_positives / label_precision_denominator if typed and label_precision_denominator else None,
+                "false_negative_count": false_negatives if typed else None,
+                "false_negative_rate": false_negatives / total if typed and total else None,
+                "label_denominator": total,
+                "per_category_recall": per_category,
+            },
+            "review_decision": {
+                "precision": review_tp / review_precision_denominator if review_precision_denominator else None,
+                "recall": review_tp / review_recall_denominator if review_recall_denominator else 1.0,
+                "false_positive_count": review_fp,
+                "false_positive_rate": review_fp / review_precision_denominator if review_precision_denominator else 0.0,
+                "false_negative_count": review_fn,
+                "false_negative_rate": review_fn / review_recall_denominator if review_recall_denominator else 0.0,
                 "review_queue_cases": sum(bool(row["review_required"]) for row in rows),
-                "runtime_proxy_steps": sum(int(row["runtime_proxy_steps"]) for row in rows),
-                "cost_proxy_check_units": sum(int(row["cost_proxy_check_units"]) for row in rows), "per_case": per_case}
+                "review_queue_rate": sum(bool(row["review_required"]) for row in rows) / len(rows) if rows else 0.0,
+            },
+            "runtime_proxy_steps": sum(int(row["runtime_proxy_steps"]) for row in rows),
+            "cost_proxy_check_units": sum(int(row["cost_proxy_check_units"]) for row in rows),
+            "per_case": per_case,
+        }
 
-    return {"run": {"dataset": "agent_auditor_cases_v1", "case_count": len(cases), "deterministic": True,
+    return {"run": {"dataset": dataset_name, "case_count": len(cases), "deterministic": True,
                        "safety": "All trace actions are inspected only; remediation is human-approved."},
             "baseline": {"raw": baseline, "metrics": score(baseline, False)},
             "agent_auditor": {"raw": agent, "metrics": score(agent, True)}}
@@ -158,8 +246,15 @@ def evaluate_auditors(cases: list[dict[str, Any]]) -> dict[str, object]:
 def write_evaluation(project_root: str | Path, output_dir: str | Path) -> dict[str, object]:
     root, output = Path(project_root), Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    report = evaluate_auditors(load_cases(root / "data" / "agent_auditor" / "cases.jsonl"))
+    development = evaluate_auditors(
+        load_cases(root / "data" / "agent_auditor" / "cases.jsonl"), "agent_auditor_development_v1"
+    )
+    heldout = evaluate_auditors(
+        load_cases(root / "data" / "agent_auditor" / "heldout_cases.jsonl"), "agent_auditor_heldout_v1"
+    )
+    report = {"development": development, "heldout": heldout}
     (output / "comparison.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    trajectories = [{"case_id": row["case_id"], "trajectory": row["trajectory"]} for row in report["agent_auditor"]["raw"]]
+    trajectories = [{"case_id": row["case_id"], "trajectory": row["trajectory"]}
+                    for row in heldout["agent_auditor"]["raw"]]
     (output / "trajectories.json").write_text(json.dumps(trajectories, indent=2) + "\n", encoding="utf-8")
     return report

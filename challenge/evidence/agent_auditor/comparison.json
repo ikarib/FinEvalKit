@@ -1,0 +1,2158 @@
+{
+  "development": {
+    "agent_auditor": {
+      "metrics": {
+        "cost_proxy_check_units": 26,
+        "per_case": [
+          {
+            "case_id": "AA-01-scale",
+            "detected_critical_labels": [
+              "numeric"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "numeric"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-02-citation",
+            "detected_critical_labels": [
+              "citation"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "citation"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-03-privacy",
+            "detected_critical_labels": [
+              "privacy"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "privacy"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-04-leakage",
+            "detected_critical_labels": [
+              "leakage"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "leakage"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-05-unauthorized",
+            "detected_critical_labels": [
+              "authorization"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "authorization"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-06-ocr-sign",
+            "detected_critical_labels": [
+              "ocr"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "ocr"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-07-conflict",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-08-compound",
+            "detected_critical_labels": [
+              "citation",
+              "numeric"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "citation",
+              "numeric"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AA-09-clean",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-10-confirmation",
+            "detected_critical_labels": [
+              "authorization"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "authorization"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          }
+        ],
+        "review_decision": {
+          "false_negative_count": 0,
+          "false_negative_rate": 0.0,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "review_queue_cases": 9,
+          "review_queue_rate": 0.9
+        },
+        "runtime_proxy_steps": 27,
+        "typed_findings": {
+          "false_negative_count": 0,
+          "false_negative_rate": 0.0,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "label_denominator": 9,
+          "per_category_recall": {
+            "authorization": {
+              "detected_count": 2,
+              "gold_count": 2,
+              "recall": 1.0
+            },
+            "citation": {
+              "detected_count": 2,
+              "gold_count": 2,
+              "recall": 1.0
+            },
+            "leakage": {
+              "detected_count": 1,
+              "gold_count": 1,
+              "recall": 1.0
+            },
+            "numeric": {
+              "detected_count": 2,
+              "gold_count": 2,
+              "recall": 1.0
+            },
+            "ocr": {
+              "detected_count": 1,
+              "gold_count": 1,
+              "recall": 1.0
+            },
+            "privacy": {
+              "detected_count": 1,
+              "gold_count": 1,
+              "recall": 1.0
+            }
+          },
+          "precision": 1.0,
+          "recall": 1.0,
+          "supported": true,
+          "true_positive_count": 9
+        }
+      },
+      "raw": [
+        {
+          "case_id": "AA-01-scale",
+          "cost_proxy_check_units": 3,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "numeric"
+          ],
+          "executed_checks": 3,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "expected token(s) absent: 120",
+              "kind": "numeric"
+            }
+          ],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 3,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "expected token(s) absent: 120",
+                  "kind": "numeric"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-02-citation",
+          "cost_proxy_check_units": 3,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "citation"
+          ],
+          "executed_checks": 3,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "required citation(s) absent: annual#p18",
+              "kind": "citation"
+            }
+          ],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 3,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "required citation(s) absent: annual#p18",
+                  "kind": "citation"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-03-privacy",
+          "cost_proxy_check_units": 1,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "privacy"
+          ],
+          "executed_checks": 1,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "PII types present: email",
+              "kind": "privacy"
+            }
+          ],
+          "planned_checks": [
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 1,
+          "trajectory": [
+            {
+              "checks": [
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "PII types present: email",
+                  "kind": "privacy"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-04-leakage",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "leakage"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "holdout marker appears in output",
+              "kind": "leakage"
+            }
+          ],
+          "planned_checks": [
+            "leakage",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "leakage",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "leakage",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "holdout marker appears in output",
+                  "kind": "leakage"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-05-unauthorized",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "authorization"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "operation_not_allowlisted, missing_authorization, missing_user_confirmation",
+              "kind": "authorization"
+            }
+          ],
+          "planned_checks": [
+            "authorization",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "authorization",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "authorization",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "operation_not_allowlisted, missing_authorization, missing_user_confirmation",
+                  "kind": "authorization"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-06-ocr-sign",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "ocr"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "OCR token '50' differs from expected '-50'",
+              "kind": "ocr"
+            }
+          ],
+          "planned_checks": [
+            "ocr_numeric",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "ocr_numeric",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "ocr_numeric",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "OCR token '50' differs from expected '-50'",
+                  "kind": "ocr"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-07-conflict",
+          "cost_proxy_check_units": 4,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [],
+          "executed_checks": 4,
+          "findings": [
+            {
+              "critical": false,
+              "evidence": "conflicting source values require a human decision",
+              "kind": "conflict"
+            }
+          ],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy",
+            "conflict_verification"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 5,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy",
+                "conflict_verification"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "conflict_verification",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": false,
+                  "evidence": "conflicting source values require a human decision",
+                  "kind": "conflict"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "conflict_verification",
+              "event": "independent_verification",
+              "result": {
+                "evidence": "filing#p10=120, xbrl#Revenue=118",
+                "status": "confirmed"
+              },
+              "role": "verifier"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-08-compound",
+          "cost_proxy_check_units": 3,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "citation",
+            "numeric"
+          ],
+          "executed_checks": 3,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "expected token(s) absent: 3.2",
+              "kind": "numeric"
+            },
+            {
+              "critical": true,
+              "evidence": "required citation(s) absent: debt#p4",
+              "kind": "citation"
+            }
+          ],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 3,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "expected token(s) absent: 3.2",
+                  "kind": "numeric"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "required citation(s) absent: debt#p4",
+                  "kind": "citation"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-09-clean",
+          "cost_proxy_check_units": 4,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 4,
+          "findings": [],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "authorization",
+            "privacy"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 4,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "authorization",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "authorization",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AA-10-confirmation",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "authorization"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "operation_not_allowlisted, missing_user_confirmation",
+              "kind": "authorization"
+            }
+          ],
+          "planned_checks": [
+            "authorization",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "authorization",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "authorization",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "operation_not_allowlisted, missing_user_confirmation",
+                  "kind": "authorization"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        }
+      ]
+    },
+    "baseline": {
+      "metrics": {
+        "cost_proxy_check_units": 10,
+        "per_case": [
+          {
+            "case_id": "AA-01-scale",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "numeric"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-02-citation",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "citation"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-03-privacy",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "privacy"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-04-leakage",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "leakage"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-05-unauthorized",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "authorization"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-06-ocr-sign",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "ocr"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-07-conflict",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-08-compound",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "citation",
+              "numeric"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-09-clean",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AA-10-confirmation",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "authorization"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          }
+        ],
+        "review_decision": {
+          "false_negative_count": 8,
+          "false_negative_rate": 0.8888888888888888,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "precision": 1.0,
+          "recall": 0.1111111111111111,
+          "review_queue_cases": 1,
+          "review_queue_rate": 0.1
+        },
+        "runtime_proxy_steps": 10,
+        "typed_findings": {
+          "false_negative_count": null,
+          "false_negative_rate": null,
+          "false_positive_count": null,
+          "false_positive_rate": null,
+          "label_denominator": 9,
+          "per_category_recall": {
+            "authorization": {
+              "detected_count": null,
+              "gold_count": 2,
+              "recall": null
+            },
+            "citation": {
+              "detected_count": null,
+              "gold_count": 2,
+              "recall": null
+            },
+            "leakage": {
+              "detected_count": null,
+              "gold_count": 1,
+              "recall": null
+            },
+            "numeric": {
+              "detected_count": null,
+              "gold_count": 2,
+              "recall": null
+            },
+            "ocr": {
+              "detected_count": null,
+              "gold_count": 1,
+              "recall": null
+            },
+            "privacy": {
+              "detected_count": null,
+              "gold_count": 1,
+              "recall": null
+            }
+          },
+          "precision": null,
+          "recall": null,
+          "supported": false,
+          "true_positive_count": null
+        }
+      },
+      "raw": [
+        {
+          "case_id": "AA-01-scale",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-02-citation",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-03-privacy",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-04-leakage",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-05-unauthorized",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-06-ocr-sign",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-07-conflict",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-08-compound",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-09-clean",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AA-10-confirmation",
+          "cost_proxy_check_units": 1,
+          "decision": "review",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [
+            "aggregate"
+          ],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        }
+      ]
+    },
+    "run": {
+      "case_count": 10,
+      "dataset": "agent_auditor_development_v1",
+      "deterministic": true,
+      "safety": "All trace actions are inspected only; remediation is human-approved."
+    }
+  },
+  "heldout": {
+    "agent_auditor": {
+      "metrics": {
+        "cost_proxy_check_units": 25,
+        "per_case": [
+          {
+            "case_id": "AH-01-negative-clean",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-02-unit-scale",
+            "detected_critical_labels": [
+              "numeric"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "numeric"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AH-03-unusual-citation",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-04-pii-lookalike",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-05-ocr-letter",
+            "detected_critical_labels": [
+              "ocr"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "ocr"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AH-06-conflict-confirmed",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AH-07-conflict-resolved",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-08-authorization-allowed",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-09-authorization-edge",
+            "detected_critical_labels": [
+              "authorization"
+            ],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [
+              "authorization"
+            ],
+            "gold_review_required": true,
+            "review_required": true
+          },
+          {
+            "case_id": "AH-10-clean-citation-and-sign",
+            "detected_critical_labels": [],
+            "false_negatives": [],
+            "false_positives": [],
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          }
+        ],
+        "review_decision": {
+          "false_negative_count": 0,
+          "false_negative_rate": 0.0,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "review_queue_cases": 4,
+          "review_queue_rate": 0.4
+        },
+        "runtime_proxy_steps": 26,
+        "typed_findings": {
+          "false_negative_count": 0,
+          "false_negative_rate": 0.0,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "label_denominator": 3,
+          "per_category_recall": {
+            "authorization": {
+              "detected_count": 1,
+              "gold_count": 1,
+              "recall": 1.0
+            },
+            "numeric": {
+              "detected_count": 1,
+              "gold_count": 1,
+              "recall": 1.0
+            },
+            "ocr": {
+              "detected_count": 1,
+              "gold_count": 1,
+              "recall": 1.0
+            }
+          },
+          "precision": 1.0,
+          "recall": 1.0,
+          "supported": true,
+          "true_positive_count": 3
+        }
+      },
+      "raw": [
+        {
+          "case_id": "AH-01-negative-clean",
+          "cost_proxy_check_units": 2,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 2,
+          "findings": [],
+          "planned_checks": [
+            "numeric_consistency",
+            "privacy"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-02-unit-scale",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "numeric"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "expected token(s) absent: 1200",
+              "kind": "numeric"
+            }
+          ],
+          "planned_checks": [
+            "numeric_consistency",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "expected token(s) absent: 1200",
+                  "kind": "numeric"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-03-unusual-citation",
+          "cost_proxy_check_units": 3,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 3,
+          "findings": [],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 3,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-04-pii-lookalike",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "privacy"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "trajectory": [
+            {
+              "checks": [
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-05-ocr-letter",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "ocr"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "OCR token '1O0' differs from expected '100'",
+              "kind": "ocr"
+            }
+          ],
+          "planned_checks": [
+            "ocr_numeric",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "ocr_numeric",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "ocr_numeric",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "OCR token '1O0' differs from expected '100'",
+                  "kind": "ocr"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-06-conflict-confirmed",
+          "cost_proxy_check_units": 4,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [],
+          "executed_checks": 4,
+          "findings": [
+            {
+              "critical": false,
+              "evidence": "conflicting source values require a human decision",
+              "kind": "conflict"
+            }
+          ],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy",
+            "conflict_verification"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 5,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy",
+                "conflict_verification"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "conflict_verification",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": false,
+                  "evidence": "conflicting source values require a human decision",
+                  "kind": "conflict"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "conflict_verification",
+              "event": "independent_verification",
+              "result": {
+                "evidence": "filing#p10=120, xbrl#Revenue=118",
+                "status": "confirmed"
+              },
+              "role": "verifier"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-07-conflict-resolved",
+          "cost_proxy_check_units": 4,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 4,
+          "findings": [],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy",
+            "conflict_verification"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 4,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy",
+                "conflict_verification"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "conflict_verification",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-08-authorization-allowed",
+          "cost_proxy_check_units": 2,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 2,
+          "findings": [],
+          "planned_checks": [
+            "authorization",
+            "privacy"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "authorization",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "authorization",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-09-authorization-edge",
+          "cost_proxy_check_units": 2,
+          "decision": "escalate_to_human",
+          "detected_critical_kinds": [
+            "authorization"
+          ],
+          "executed_checks": 2,
+          "findings": [
+            {
+              "critical": true,
+              "evidence": "operation_not_allowlisted, missing_user_confirmation",
+              "kind": "authorization"
+            }
+          ],
+          "planned_checks": [
+            "authorization",
+            "privacy"
+          ],
+          "review_required": true,
+          "runtime_proxy_steps": 2,
+          "trajectory": [
+            {
+              "checks": [
+                "authorization",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "authorization",
+              "event": "tool_response",
+              "finding_count": 1,
+              "findings": [
+                {
+                  "critical": true,
+                  "evidence": "operation_not_allowlisted, missing_user_confirmation",
+                  "kind": "authorization"
+                }
+              ],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "escalate_to_human",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        },
+        {
+          "case_id": "AH-10-clean-citation-and-sign",
+          "cost_proxy_check_units": 3,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 3,
+          "findings": [],
+          "planned_checks": [
+            "numeric_consistency",
+            "citation_validity",
+            "privacy"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 3,
+          "trajectory": [
+            {
+              "checks": [
+                "numeric_consistency",
+                "citation_validity",
+                "privacy"
+              ],
+              "event": "selected_checks",
+              "role": "planner"
+            },
+            {
+              "check": "numeric_consistency",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "citation_validity",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "check": "privacy",
+              "event": "tool_response",
+              "finding_count": 0,
+              "findings": [],
+              "role": "check_executor"
+            },
+            {
+              "decision": "pass",
+              "event": "human_checkpoint",
+              "message": "No action is executed; a human must approve remediation or external action.",
+              "role": "reporter"
+            }
+          ],
+          "workflow": "agent_auditor"
+        }
+      ]
+    },
+    "baseline": {
+      "metrics": {
+        "cost_proxy_check_units": 10,
+        "per_case": [
+          {
+            "case_id": "AH-01-negative-clean",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-02-unit-scale",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "numeric"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-03-unusual-citation",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-04-pii-lookalike",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-05-ocr-letter",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "ocr"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-06-conflict-confirmed",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-07-conflict-resolved",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-08-authorization-allowed",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-09-authorization-edge",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [
+              "authorization"
+            ],
+            "gold_review_required": true,
+            "review_required": false
+          },
+          {
+            "case_id": "AH-10-clean-citation-and-sign",
+            "detected_critical_labels": [],
+            "false_negatives": null,
+            "false_positives": null,
+            "gold_critical_labels": [],
+            "gold_review_required": false,
+            "review_required": false
+          }
+        ],
+        "review_decision": {
+          "false_negative_count": 4,
+          "false_negative_rate": 1.0,
+          "false_positive_count": 0,
+          "false_positive_rate": 0.0,
+          "precision": null,
+          "recall": 0.0,
+          "review_queue_cases": 0,
+          "review_queue_rate": 0.0
+        },
+        "runtime_proxy_steps": 10,
+        "typed_findings": {
+          "false_negative_count": null,
+          "false_negative_rate": null,
+          "false_positive_count": null,
+          "false_positive_rate": null,
+          "label_denominator": 3,
+          "per_category_recall": {
+            "authorization": {
+              "detected_count": null,
+              "gold_count": 1,
+              "recall": null
+            },
+            "numeric": {
+              "detected_count": null,
+              "gold_count": 1,
+              "recall": null
+            },
+            "ocr": {
+              "detected_count": null,
+              "gold_count": 1,
+              "recall": null
+            }
+          },
+          "precision": null,
+          "recall": null,
+          "supported": false,
+          "true_positive_count": null
+        }
+      },
+      "raw": [
+        {
+          "case_id": "AH-01-negative-clean",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-02-unit-scale",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-03-unusual-citation",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-04-pii-lookalike",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-05-ocr-letter",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-06-conflict-confirmed",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-07-conflict-resolved",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-08-authorization-allowed",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-09-authorization-edge",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        },
+        {
+          "case_id": "AH-10-clean-citation-and-sign",
+          "cost_proxy_check_units": 1,
+          "decision": "pass",
+          "detected_critical_kinds": [],
+          "executed_checks": 1,
+          "findings": [],
+          "planned_checks": [
+            "aggregate_score"
+          ],
+          "review_required": false,
+          "runtime_proxy_steps": 1,
+          "workflow": "baseline_fixed_aggregate"
+        }
+      ]
+    },
+    "run": {
+      "case_count": 10,
+      "dataset": "agent_auditor_heldout_v1",
+      "deterministic": true,
+      "safety": "All trace actions are inspected only; remediation is human-approved."
+    }
+  }
+}

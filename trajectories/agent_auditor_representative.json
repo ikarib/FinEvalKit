@@ -4,18 +4,18 @@
   "agent_roles": {
     "planner": "Route only applicable deterministic checks from supplied output and trace fields.",
     "check_executor": "Run sandboxed read-only checks; never execute supplied actions.",
-    "verifier": "Retry a conflicting-evidence finding against all supplied sources and preserve disagreement.",
+    "verifier": "Independently verify a conflicting-evidence finding from separately supplied source/value records and preserve disagreement.",
     "reporter": "Produce an audit decision; human approval is required before remediation or external action."
   },
-  "input": {"case_id":"AA-07-conflict","output":"Revenue is $120 million.","citations":["filing#p10"],"conflicting_evidence":{"filing#p10":"120","xbrl#Revenue":"118"}},
+  "input": {"case_id":"AA-07-conflict","output":"Revenue is $120 million.","citations":["filing#p10"],"conflicting_evidence":{"filing#p10":"120","xbrl#Revenue":"118"},"independent_evidence":[{"source":"filing#p10","value":"120"},{"source":"xbrl#Revenue","value":"118"}]},
   "events": [
     {"role":"planner","event":"selected_checks","tool_response":{"checks":["numeric_consistency","citation_validity","privacy","conflict_verification"]}},
     {"role":"check_executor","event":"tool_response","check":"numeric_consistency","result":"pass: expected token 120 is present"},
     {"role":"check_executor","event":"tool_response","check":"citation_validity","result":"pass: filing#p10 is supplied"},
     {"role":"check_executor","event":"tool_response","check":"privacy","result":"pass: no configured PII pattern"},
     {"role":"check_executor","event":"tool_response","check":"conflict_verification","result":"finding: conflicting source values require a human decision"},
-    {"role":"verifier","event":"retry","feedback":"filing#p10=120 and xbrl#Revenue=118 remain inconsistent","result":"preserve both values; do not select one automatically"},
+    {"role":"verifier","event":"independent_verification","check":"conflict_verification","result":{"status":"confirmed","evidence":"filing#p10=120, xbrl#Revenue=118"}},
     {"role":"reporter","event":"human_checkpoint","decision":"escalate_to_human","result":"No action executed. Human must determine authoritative source and approve remediation."}
   ],
-  "final_artifact": "challenge/evidence/final_results.json"
+  "final_artifact": "challenge/evidence/agent_auditor/comparison.json"
 }

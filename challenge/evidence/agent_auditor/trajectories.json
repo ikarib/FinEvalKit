@@ -1,0 +1,405 @@
+[
+  {
+    "case_id": "AH-01-negative-clean",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "numeric_consistency",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "numeric_consistency",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "pass",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-02-unit-scale",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "numeric_consistency",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "numeric_consistency",
+        "finding_count": 1,
+        "findings": [
+          {
+            "kind": "numeric",
+            "critical": true,
+            "evidence": "expected token(s) absent: 1200"
+          }
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "escalate_to_human",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-03-unusual-citation",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "numeric_consistency",
+          "citation_validity",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "numeric_consistency",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "citation_validity",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "pass",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-04-pii-lookalike",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "pass",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-05-ocr-letter",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "ocr_numeric",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "ocr_numeric",
+        "finding_count": 1,
+        "findings": [
+          {
+            "kind": "ocr",
+            "critical": true,
+            "evidence": "OCR token '1O0' differs from expected '100'"
+          }
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "escalate_to_human",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-06-conflict-confirmed",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "numeric_consistency",
+          "citation_validity",
+          "privacy",
+          "conflict_verification"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "numeric_consistency",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "citation_validity",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "conflict_verification",
+        "finding_count": 1,
+        "findings": [
+          {
+            "kind": "conflict",
+            "critical": false,
+            "evidence": "conflicting source values require a human decision"
+          }
+        ]
+      },
+      {
+        "role": "verifier",
+        "event": "independent_verification",
+        "check": "conflict_verification",
+        "result": {
+          "status": "confirmed",
+          "evidence": "filing#p10=120, xbrl#Revenue=118"
+        }
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "escalate_to_human",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-07-conflict-resolved",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "numeric_consistency",
+          "citation_validity",
+          "privacy",
+          "conflict_verification"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "numeric_consistency",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "citation_validity",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "conflict_verification",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "pass",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-08-authorization-allowed",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "authorization",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "authorization",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "pass",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-09-authorization-edge",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "authorization",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "authorization",
+        "finding_count": 1,
+        "findings": [
+          {
+            "kind": "authorization",
+            "critical": true,
+            "evidence": "operation_not_allowlisted, missing_user_confirmation"
+          }
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "escalate_to_human",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  },
+  {
+    "case_id": "AH-10-clean-citation-and-sign",
+    "trajectory": [
+      {
+        "role": "planner",
+        "event": "selected_checks",
+        "checks": [
+          "numeric_consistency",
+          "citation_validity",
+          "privacy"
+        ]
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "numeric_consistency",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "citation_validity",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "check_executor",
+        "event": "tool_response",
+        "check": "privacy",
+        "finding_count": 0,
+        "findings": []
+      },
+      {
+        "role": "reporter",
+        "event": "human_checkpoint",
+        "decision": "pass",
+        "message": "No action is executed; a human must approve remediation or external action."
+      }
+    ]
+  }
+]

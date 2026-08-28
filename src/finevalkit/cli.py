@@ -98,11 +98,12 @@ def main() -> None:
     elif args.command == "agent-auditor-demo":
         root = Path(__file__).resolve().parents[2]
         report = write_evaluation(root, args.output_dir)
-        metrics = report["agent_auditor"]["metrics"]
+        metrics = report["heldout"]["agent_auditor"]["metrics"]
+        typed = metrics["typed_findings"]
         print(
             "Wrote Agent Auditor comparison; "
-            f"critical recall={metrics['critical_failure_detection_recall']:.3f} "
-            f"({metrics['detected_critical_labels']}/{metrics['critical_label_denominator']})"
+            f"held-out typed recall={typed['recall']:.3f} "
+            f"({typed['true_positive_count']}/{typed['label_denominator']})"
         )
 
 
