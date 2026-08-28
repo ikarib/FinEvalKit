@@ -1,0 +1,23 @@
+{
+  "format": "FinEvalKit trajectory manifest",
+  "source": "Codex CLI complete session histories",
+  "session_count": 1,
+  "sessions": [
+    {
+      "session_id": "01a049c1-41b6-7a31-9554-aebb3bf34db3",
+      "schema_version": "ATIF-v1.7",
+      "raw_file": "trajectories/raw/rollout-2026-08-28T13-03-17-01a049c1-41b6-7a31-9554-aebb3bf34db3.jsonl",
+      "atif_file": "trajectories/atif/rollout-2026-08-28T13-03-17-01a049c1-41b6-7a31-9554-aebb3bf34db3.trajectory.json",
+      "raw_sha256": "2aa3737d92345b042440100847338f23eeb59e4255c1c58140d41f07a8ce3ba8",
+      "atif_sha256": "a1cd38bc953bda548e49b6f4f755416bb73cb1d17c8abc7f420adcc8ac616a39",
+      "step_count": 32,
+      "user_steps": 2,
+      "agent_steps": 30,
+      "tool_calls": 24,
+      "observations": 24,
+      "start_timestamp": "2026-08-28T19:44:59.815Z",
+      "end_timestamp": "2026-08-28T19:51:23.029Z",
+      "human_prompt": "Implement a hackathon-ready extension of the FinEvalKit repository for micro1’s Frontier Engineering Challenge 2026. Inspect current repository architecture before editing. The existing repository is an audit-ready evaluation toolkit for financial-document RAG and tool-using AI agents, with deterministic demos covering retrieval, citations, numerical consistency, OCR, privacy/leakage, automated-judge calibration, monitoring, authorization, and reproducibility.\n\nThe desired entry is “FinEvalKit Agent Auditor.” Its target user is an AI/ML or risk team deploying financial-document RAG and tool-using agents. The bottleneck is that manual evaluation is slow and aggregate scores can hide critical numerical, citation, privacy, leakage, or authorization failures. Build a narrow, useful, end-to-end agentic workflow that inspects an evaluation target’s outputs and traces, selects and runs appropriate checks, verifies findings, and produces an audit-ready report plus a human-review or escalation queue. Keep consequential actions simulated or sandboxed and require human approval where appropriate.\n\nThe hackathon requires a fair simple baseline and an improved agent solution evaluated on the same cases. Add a clearly labeled baseline, such as naive aggregate scoring or a basic fixed checklist, and compare it with the Agent Auditor on at least ten reproducible cases. Include at least one difficult case involving OCR, sign or scale mistakes, conflicting evidence, or authorization boundaries. Use defensible metrics such as critical-failure detection recall, false-negative count or rate, review time/steps, and deterministic runtime/cost proxies. Do not fabricate performance claims: generate checked-in evidence from actual runs.\n\nImplement the smallest coherent design that scores well rather than unnecessary complexity. Purposeful agent behavior should be observable: selection or planning of checks, tool/check execution, verification, retries or escalation, and final report generation. Record representative, privacy-safe trajectories for every agent or agent role used, including instructions, tool responses, feedback, retries, and human checkpoints. Preserve FinEvalKit’s existing strengths and compatibility where practical.\n\nCreate hackathon-ready documentation inside the repository: clearly define the user and bottleneck; identify the pre-existing project state and disclose what was added for the competition; provide an Improvement Changelog from baseline through meaningful iterations, including at least one removed or rejected experiment and the evidence behind decisions; provide a clean-environment reproduction guide with exact commands, data requirements, expected outputs, relevant versions, approximate runtime, and cost; include the final baseline-versus-agent results table; document the main failure mode and a concise “hot take”; and draft a five-minute demo video script or storyboard covering the problem, baseline, one end-to-end run, comparison, changelog, biggest contribution, and one removed experiment. Do not claim that a video was recorded.\n\nRun the relevant tests, lint/type checks where already configured, and all new demonstration/evaluation commands. Inspect generated reports and trajectories for internal consistency. Preserve existing user work. Do not push, publish, register, or submit anything externally. If repository access or a material product decision blocks progress, report the precise blocker and the smallest decision needed.\n\nLeave concise commentary in this task when meaningful progress is made or a new phase begins."
+    }
+  ]
+}

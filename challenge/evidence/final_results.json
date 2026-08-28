@@ -1,0 +1,20 @@
+{
+  "command": ".venv/bin/python -m finevalkit.cli agent-auditor-demo --output-dir artifacts/agent_auditor",
+  "dataset": "data/agent_auditor/cases.jsonl",
+  "case_count": 10,
+  "critical_label_denominator": 9,
+  "baseline": {"critical_failure_detection_recall": 0.0, "detected_critical_labels": 0, "false_negative_count": 9, "review_queue_cases": 1, "runtime_proxy_steps": 10, "cost_proxy_check_units": 10},
+  "agent_auditor": {"critical_failure_detection_recall": 1.0, "detected_critical_labels": 9, "false_negative_count": 0, "review_queue_cases": 9, "runtime_proxy_steps": 27, "cost_proxy_check_units": 26},
+  "per_case": [
+    {"case_id":"AA-01-scale","expected":["numeric"],"agent_detected":["numeric"]},
+    {"case_id":"AA-02-citation","expected":["citation"],"agent_detected":["citation"]},
+    {"case_id":"AA-03-privacy","expected":["privacy"],"agent_detected":["privacy"]},
+    {"case_id":"AA-04-leakage","expected":["leakage"],"agent_detected":["leakage"]},
+    {"case_id":"AA-05-unauthorized","expected":["authorization"],"agent_detected":["authorization"]},
+    {"case_id":"AA-06-ocr-sign","expected":["ocr"],"agent_detected":["ocr"]},
+    {"case_id":"AA-07-conflict","expected":[],"agent_detected":[],"human_escalation":true},
+    {"case_id":"AA-08-compound","expected":["numeric","citation"],"agent_detected":["numeric","citation"]},
+    {"case_id":"AA-09-clean","expected":[],"agent_detected":[]},
+    {"case_id":"AA-10-confirmation","expected":["authorization"],"agent_detected":["authorization"]}
+  ]
+}

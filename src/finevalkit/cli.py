@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from .agent_auditor import write_evaluation
 from .judge import calibrate_judge, load_judgments
 from .observability import log_benchmark_to_wandb
 from .pipeline import run_demo
@@ -44,6 +45,10 @@ def build_parser() -> argparse.ArgumentParser:
     wandb_run.add_argument("--output-dir", default="artifacts/wandb")
     judge = subparsers.add_parser("calibrate-judge", help="compare judge labels to human gold")
     judge.add_argument("input")
+    auditor = subparsers.add_parser(
+        "agent-auditor-demo", help="compare aggregate baseline with the sandboxed Agent Auditor"
+    )
+    auditor.add_argument("--output-dir", default="artifacts/agent_auditor")
     return parser
 
 
@@ -90,6 +95,15 @@ def main() -> None:
     elif args.command == "calibrate-judge":
         report = calibrate_judge(load_judgments(args.input))
         print(f"Judge macro-F1={report['macro_f1']:.3f}; review={len(report['review_queue'])}")
+    elif args.command == "agent-auditor-demo":
+        root = Path(__file__).resolve().parents[2]
+        report = write_evaluation(root, args.output_dir)
+        metrics = report["agent_auditor"]["metrics"]
+        print(
+            "Wrote Agent Auditor comparison; "
+            f"critical recall={metrics['critical_failure_detection_recall']:.3f} "
+            f"({metrics['detected_critical_labels']}/{metrics['critical_label_denominator']})"
+        )
 
 
 if __name__ == "__main__":

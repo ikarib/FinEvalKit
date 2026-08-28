@@ -10,6 +10,23 @@ FinEvalKit is a compact, reproducible portfolio project showing how to turn fina
 
 The repository combines synthetic policy cases with attributed fixtures derived from Apple Inc.'s 2025 Form 10-K and Infosys Limited's 2025 IFRS Form 20-F. Its deterministic demonstrations require no LLM API or network access; optional commands exercise a pinned Hugging Face embedding model and Weights & Biases tracking.
 
+## Frontier Engineering Challenge 2026: Agent Auditor
+
+**FinEvalKit Agent Auditor** is the challenge extension for AI/ML and risk teams that need to inspect a financial RAG or tool-using agent's answer and trace before trusting it. Its narrow workflow routes appropriate deterministic checks, records each check response, retries conflicting evidence, and produces a human-review/escalation decision. It is sandboxed: it only inspects proposed actions and never executes them.
+
+The pre-existing project provided the individual evaluators and deterministic v1–v3 demos. This extension adds the end-to-end router, frozen ten-case baseline comparison, checked-in evidence, representative trajectory, and submission materials. See the [design](docs/agent_auditor_design.md), [results](challenge/evidence/final_results.json), [improvement changelog](docs/improvement_changelog.md), [reproduction guide](docs/agent_auditor_reproduction.md), [trajectory manifest](trajectories/manifest.json), and [five-minute video storyboard](docs/agent_auditor_video_storyboard.md).
+
+```bash
+fineval agent-auditor-demo --output-dir artifacts/agent_auditor
+```
+
+| Workflow | Critical-failure detection recall | False negatives | Deterministic check-cost units |
+|---|---:|---:|---:|
+| Fixed aggregate baseline | 0/9 | 9 | 10 |
+| Agent Auditor | 9/9 | 0 | 26 |
+
+These are results from the frozen synthetic fixture, not a claim about production performance. The Agent Auditor intentionally produces more review cases (9 vs. 1) because it supplies evidence rather than silently passing high aggregate scores.
+
 ## What it demonstrates
 
 | Capability | Evidence in this repository |

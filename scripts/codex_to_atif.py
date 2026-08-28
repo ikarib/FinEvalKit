@@ -8,6 +8,15 @@ from pathlib import Path
 from typing import Any
 
 
+def redact_local_paths(text: str) -> str:
+    return text.replace(
+        "/home/ikarib/FinEvalKit",
+        "$PROJECT_ROOT",
+    ).replace(
+        "/home/ikarib",
+        "$HOME",
+    )
+
 def text_content(content: Any) -> str:
     """Extract text from Codex message/output content arrays."""
     if isinstance(content, str):
@@ -26,7 +35,7 @@ def text_content(content: Any) -> str:
         if isinstance(text, str):
             parts.append(text)
 
-    return "".join(parts)
+    return redact_local_paths("".join(parts))
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -111,7 +120,7 @@ def convert(path: Path) -> dict[str, Any]:
                 "tool_call_id": call_id,
                 "function_name": payload.get("name", "unknown"),
                 "arguments": {
-                    "raw_input": payload.get("input", "")
+                    "raw_input": redact_local_paths(payload.get("input", ""))
                 },
             }
 
@@ -201,7 +210,7 @@ def convert(path: Path) -> dict[str, Any]:
         "extra": {
             "source_format": "codex-cli-jsonl",
             "source_file": path.name,
-            "cwd": session_meta.get("cwd"),
+            "cwd": redact_local_paths(session_meta.get("cwd") or ""),
             "originator": session_meta.get("originator"),
         },
     }
