@@ -6,8 +6,5 @@ __pycache__/
 dist/
 build/
 *.egg-info/
-artifacts/*.json
-artifacts/*.md
-!artifacts/.gitkeep
-artifacts/wandb/
+artifacts*
 wandb/
