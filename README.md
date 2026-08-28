@@ -10,6 +10,27 @@ FinEvalKit is a compact, reproducible portfolio project showing how to turn fina
 
 The repository combines synthetic policy cases with attributed fixtures derived from Apple Inc.'s 2025 Form 10-K and Infosys Limited's 2025 IFRS Form 20-F. Its deterministic demonstrations require no LLM API or network access; optional commands exercise a pinned Hugging Face embedding model and Weights & Biases tracking.
 
+## Frontier Engineering Challenge 2026 entry
+
+**FinEvalKit Agent Auditor** is the hackathon extension for AI/ML and risk teams deploying
+financial-document RAG and tool-using agents. It risk-routes checks over outputs and traces,
+verifies findings by deterministic replay, and produces an audit report plus a human-review
+queue. Consequential actions are simulated and critical findings require human approval.
+
+```bash
+PYTHONPATH=src python -m finevalkit.cli agent-audit \
+  --output-dir benchmarks/results/agent-auditor
+```
+
+The 12-case comparison, full provenance, pre-existing-project disclosure, reproduction guide,
+limitations, and improvement changelog are in [the hackathon entry](docs/frontier_challenge_2026.md).
+The [five-minute demo storyboard](docs/demo_video_storyboard.md) is a script; no recorded video is
+claimed.
+
+Checked result: critical-failure recall improves from 0.222 (7 false negatives) to 1.000
+(0 false negatives) on the same deterministic fixture, at 45 versus 24 check-execution units. These
+are local benchmark results, not a production-generalization claim.
+
 ## What it demonstrates
 
 | Capability | Evidence in this repository |

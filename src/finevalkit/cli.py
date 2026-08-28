@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Sequence
 from pathlib import Path
 
+from .agent_auditor import run_audit
 from .judge import calibrate_judge, load_judgments
 from .observability import log_benchmark_to_wandb
 from .pipeline import run_demo
@@ -44,11 +46,17 @@ def build_parser() -> argparse.ArgumentParser:
     wandb_run.add_argument("--output-dir", default="artifacts/wandb")
     judge = subparsers.add_parser("calibrate-judge", help="compare judge labels to human gold")
     judge.add_argument("input")
+    auditor = subparsers.add_parser(
+        "agent-audit", help="compare the fixed baseline with the risk-routed Agent Auditor"
+    )
+    project_root = Path(__file__).resolve().parents[2]
+    auditor.add_argument("--cases", default=project_root / "data/agent_auditor_cases.jsonl")
+    auditor.add_argument("--output-dir", default="artifacts-agent-auditor")
     return parser
 
 
-def main() -> None:
-    args = build_parser().parse_args()
+def main(argv: Sequence[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
     if args.command == "demo":
         root = Path(__file__).resolve().parents[2]
         report = run_demo(root, args.output_dir)
@@ -90,7 +98,17 @@ def main() -> None:
     elif args.command == "calibrate-judge":
         report = calibrate_judge(load_judgments(args.input))
         print(f"Judge macro-F1={report['macro_f1']:.3f}; review={len(report['review_queue'])}")
+    elif args.command == "agent-audit":
+        report = run_audit(args.cases, args.output_dir)
+        baseline = report["comparison"]["baseline"]
+        agent = report["comparison"]["agent_auditor"]
+        print(
+            "Wrote Agent Auditor evidence; "
+            f"baseline recall={baseline['critical_failure_detection_recall']:.3f}; "
+            f"agent recall={agent['critical_failure_detection_recall']:.3f}"
+        )
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

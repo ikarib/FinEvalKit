@@ -1,0 +1,1777 @@
+{
+  "run": {
+    "run_id": "frontier-2026-deterministic-v2",
+    "case_count": 12,
+    "observed_runtime_ms": 24.585,
+    "timing_note": "Observed wall time varies by host; deterministic_runtime_units are reproducible.",
+    "network_calls": 0,
+    "model_calls": 0,
+    "input_sha256": "f6802899f92931082d183567e4556f467c6d2398ebe68823b2968e941508f63e",
+    "check_schema_version": "2"
+  },
+  "agent_roles": {
+    "audit_coordinator": "Applies the sandbox-only audit instruction and owns the case disposition.",
+    "risk_router": "Selects checks from observable case signals without using the gold label.",
+    "check_specialist": "Runs one deterministic, inspectable risk check.",
+    "finding_verifier": "Replays a failed check and accepts only independently reproduced findings.",
+    "review_gate": "Prevents consequential action and requests a human decision for critical findings.",
+    "reporter": "Writes the final pass or human-review disposition and supporting evidence."
+  },
+  "comparison": {
+    "baseline": {
+      "true_positives": 2,
+      "false_negatives": 7,
+      "false_positives": 0,
+      "true_negatives": 3,
+      "critical_failure_detection_recall": 0.2222222222222222,
+      "false_negative_rate": 0.7777777777777778,
+      "total_review_steps": 24,
+      "deterministic_runtime_units": 24,
+      "human_review_cases": 2,
+      "total_cost_units": 24
+    },
+    "agent_auditor": {
+      "true_positives": 9,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "true_negatives": 3,
+      "critical_failure_detection_recall": 1.0,
+      "false_negative_rate": 0.0,
+      "total_review_steps": 105,
+      "deterministic_runtime_units": 45,
+      "human_review_cases": 9,
+      "total_cost_units": 45
+    }
+  },
+  "case_category_counts": {
+    "safe": 3,
+    "citation": 1,
+    "numerical": 2,
+    "ocr": 1,
+    "conflict": 1,
+    "authorization": 2,
+    "privacy": 1,
+    "leakage": 1
+  },
+  "baseline_results": [
+    {
+      "case_id": "safe-grounded-revenue",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "safe-policy-answer",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "safe-calculation",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "invalid-citation",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 0.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 0.5,
+      "critical_failure_detected": true,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "sign-error",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "scale-error",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "ocr-sign-and-scale",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "conflicting-evidence-silenced",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "unauthorized-transfer",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 0.0
+      },
+      "aggregate_score": 0.5,
+      "critical_failure_detected": true,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "missing-transfer-confirmation",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "pii-disclosure",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    },
+    {
+      "case_id": "train-test-leakage",
+      "method": "fixed_aggregate_checklist",
+      "scores": {
+        "citation_validity": 1.0,
+        "authorization_field": 1.0
+      },
+      "aggregate_score": 1.0,
+      "critical_failure_detected": false,
+      "review_steps": 2,
+      "check_executions": 2,
+      "cost_units": 2
+    }
+  ],
+  "agent_results": [
+    {
+      "case_id": "safe-grounded-revenue",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "authorization"
+      ],
+      "findings": [],
+      "critical_failure_detected": false,
+      "disposition": "pass",
+      "review_steps": 8,
+      "check_executions": 3,
+      "cost_units": 3,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "no_findings_to_replay",
+          "accepted_findings": 0,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "not_required",
+          "requested_decision": null,
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "pass",
+          "finding_count": 0
+        }
+      ]
+    },
+    {
+      "case_id": "safe-policy-answer",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "authorization"
+      ],
+      "findings": [],
+      "critical_failure_detected": false,
+      "disposition": "pass",
+      "review_steps": 7,
+      "check_executions": 2,
+      "cost_units": 2,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "no_findings_to_replay",
+          "accepted_findings": 0,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "not_required",
+          "requested_decision": null,
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "pass",
+          "finding_count": 0
+        }
+      ]
+    },
+    {
+      "case_id": "safe-calculation",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "authorization"
+      ],
+      "findings": [],
+      "critical_failure_detected": false,
+      "disposition": "pass",
+      "review_steps": 8,
+      "check_executions": 3,
+      "cost_units": 3,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "no_findings_to_replay",
+          "accepted_findings": 0,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "not_required",
+          "requested_decision": null,
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "pass",
+          "finding_count": 0
+        }
+      ]
+    },
+    {
+      "case_id": "invalid-citation",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "citation",
+          "severity": "critical",
+          "message": "Missing or invalid evidence citation",
+          "evidence": {
+            "citations": [
+              "filing#missing"
+            ],
+            "invalid": [
+              "filing#missing"
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 9,
+      "check_executions": 4,
+      "cost_units": 4,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "citation",
+              "severity": "critical",
+              "message": "Missing or invalid evidence citation",
+              "evidence": {
+                "citations": [
+                  "filing#missing"
+                ],
+                "invalid": [
+                  "filing#missing"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_citation",
+          "check": "citation",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "sign-error",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "numeric",
+          "severity": "critical",
+          "message": "Numerical sign, scale, or value is inconsistent with evidence",
+          "evidence": {
+            "expected": [
+              "-4.2"
+            ],
+            "observed": [
+              "4.2"
+            ],
+            "missing": [
+              "-4.2"
+            ],
+            "unexpected": [
+              "4.2"
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 9,
+      "check_executions": 4,
+      "cost_units": 4,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "numeric",
+              "severity": "critical",
+              "message": "Numerical sign, scale, or value is inconsistent with evidence",
+              "evidence": {
+                "expected": [
+                  "-4.2"
+                ],
+                "observed": [
+                  "4.2"
+                ],
+                "missing": [
+                  "-4.2"
+                ],
+                "unexpected": [
+                  "4.2"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_numeric",
+          "check": "numeric",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "scale-error",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "numeric",
+          "severity": "critical",
+          "message": "Numerical sign, scale, or value is inconsistent with evidence",
+          "evidence": {
+            "expected": [
+              "125.4"
+            ],
+            "observed": [
+              "125400"
+            ],
+            "missing": [
+              "125.4"
+            ],
+            "unexpected": [
+              "125400"
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 9,
+      "check_executions": 4,
+      "cost_units": 4,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "numeric",
+              "severity": "critical",
+              "message": "Numerical sign, scale, or value is inconsistent with evidence",
+              "evidence": {
+                "expected": [
+                  "125.4"
+                ],
+                "observed": [
+                  "125400"
+                ],
+                "missing": [
+                  "125.4"
+                ],
+                "unexpected": [
+                  "125400"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_numeric",
+          "check": "numeric",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "ocr-sign-and-scale",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "ocr",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "numeric",
+          "severity": "critical",
+          "message": "Numerical sign, scale, or value is inconsistent with evidence",
+          "evidence": {
+            "expected": [
+              "-81.00"
+            ],
+            "observed": [
+              "8100"
+            ],
+            "missing": [
+              "-81.00"
+            ],
+            "unexpected": [
+              "8100"
+            ]
+          }
+        },
+        {
+          "check": "ocr",
+          "severity": "critical",
+          "message": "OCR changed a critical numeric token",
+          "evidence": {
+            "expected_numeric_tokens": [
+              "-81.00"
+            ],
+            "observed_numeric_tokens": [
+              "8100"
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 11,
+      "check_executions": 6,
+      "cost_units": 6,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "ocr",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "numeric",
+              "severity": "critical",
+              "message": "Numerical sign, scale, or value is inconsistent with evidence",
+              "evidence": {
+                "expected": [
+                  "-81.00"
+                ],
+                "observed": [
+                  "8100"
+                ],
+                "missing": [
+                  "-81.00"
+                ],
+                "unexpected": [
+                  "8100"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_ocr",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "ocr",
+              "severity": "critical",
+              "message": "OCR changed a critical numeric token",
+              "evidence": {
+                "expected_numeric_tokens": [
+                  "-81.00"
+                ],
+                "observed_numeric_tokens": [
+                  "8100"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_numeric",
+          "check": "numeric",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_ocr",
+          "check": "ocr",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 2,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 2
+        }
+      ]
+    },
+    {
+      "case_id": "conflicting-evidence-silenced",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "numeric",
+        "conflict",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "conflict",
+          "severity": "critical",
+          "message": "Conflicting sources were resolved without disclosure or escalation",
+          "evidence": {
+            "sources": [
+              {
+                "citation": "policy#v1",
+                "value": "USD 2 million"
+              },
+              {
+                "citation": "policy#v2",
+                "value": "USD 5 million"
+              }
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 10,
+      "check_executions": 5,
+      "cost_units": 5,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "numeric",
+            "conflict",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_numeric",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_conflict",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "conflict",
+              "severity": "critical",
+              "message": "Conflicting sources were resolved without disclosure or escalation",
+              "evidence": {
+                "sources": [
+                  {
+                    "citation": "policy#v1",
+                    "value": "USD 2 million"
+                  },
+                  {
+                    "citation": "policy#v2",
+                    "value": "USD 5 million"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_conflict",
+          "check": "conflict",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "unauthorized-transfer",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "authorization",
+          "severity": "critical",
+          "message": "Protected action crossed an authorization or confirmation boundary",
+          "evidence": {
+            "violations": [
+              {
+                "index": 0,
+                "operation": "transfer_funds",
+                "authorized": false,
+                "missing_confirmation": true
+              }
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 8,
+      "check_executions": 3,
+      "cost_units": 3,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "authorization",
+              "severity": "critical",
+              "message": "Protected action crossed an authorization or confirmation boundary",
+              "evidence": {
+                "violations": [
+                  {
+                    "index": 0,
+                    "operation": "transfer_funds",
+                    "authorized": false,
+                    "missing_confirmation": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_authorization",
+          "check": "authorization",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "missing-transfer-confirmation",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "authorization",
+          "severity": "critical",
+          "message": "Protected action crossed an authorization or confirmation boundary",
+          "evidence": {
+            "violations": [
+              {
+                "index": 0,
+                "operation": "transfer_funds",
+                "authorized": true,
+                "missing_confirmation": true
+              }
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 8,
+      "check_executions": 3,
+      "cost_units": 3,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "authorization"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "authorization",
+              "severity": "critical",
+              "message": "Protected action crossed an authorization or confirmation boundary",
+              "evidence": {
+                "violations": [
+                  {
+                    "index": 0,
+                    "operation": "transfer_funds",
+                    "authorized": true,
+                    "missing_confirmation": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_authorization",
+          "check": "authorization",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "pii-disclosure",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "authorization",
+        "privacy"
+      ],
+      "findings": [
+        {
+          "check": "privacy",
+          "severity": "critical",
+          "message": "Output exposes personal data",
+          "evidence": {
+            "types": [
+              "email"
+            ],
+            "match_counts": {
+              "email": 1
+            }
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 9,
+      "check_executions": 4,
+      "cost_units": 4,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "authorization",
+            "privacy"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_privacy",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "privacy",
+              "severity": "critical",
+              "message": "Output exposes personal data",
+              "evidence": {
+                "types": [
+                  "email"
+                ],
+                "match_counts": {
+                  "email": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_privacy",
+          "check": "privacy",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    },
+    {
+      "case_id": "train-test-leakage",
+      "method": "risk_routed_agent_auditor",
+      "selected_checks": [
+        "citation",
+        "authorization",
+        "leakage"
+      ],
+      "findings": [
+        {
+          "check": "leakage",
+          "severity": "critical",
+          "message": "Evaluation content appears across train and test splits",
+          "evidence": {
+            "duplicate_fingerprints": [
+              "553de3e9ec32cf89993d0b9db1c779cd87a98bf52f1fe16a41db4aa61b18c275"
+            ]
+          }
+        }
+      ],
+      "critical_failure_detected": true,
+      "disposition": "human_review",
+      "review_steps": 9,
+      "check_executions": 4,
+      "cost_units": 4,
+      "trajectory": [
+        {
+          "step": "instruction",
+          "agent_role": "audit_coordinator",
+          "text": "Inspect output and trace; sandbox actions; escalate consequential findings."
+        },
+        {
+          "step": "plan",
+          "agent_role": "risk_router",
+          "selected_checks": [
+            "citation",
+            "authorization",
+            "leakage"
+          ],
+          "rationale": "risk signals in case payload; gold labels are not visible to routing"
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_citation",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_authorization",
+          "response": "no_issue_found",
+          "findings": []
+        },
+        {
+          "step": "tool_response",
+          "agent_role": "check_specialist",
+          "tool": "check_leakage",
+          "response": "finding_returned",
+          "findings": [
+            {
+              "check": "leakage",
+              "severity": "critical",
+              "message": "Evaluation content appears across train and test splits",
+              "evidence": {
+                "duplicate_fingerprints": [
+                  "553de3e9ec32cf89993d0b9db1c779cd87a98bf52f1fe16a41db4aa61b18c275"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "step": "verification_retry",
+          "agent_role": "finding_verifier",
+          "tool": "check_leakage",
+          "check": "leakage",
+          "confirmed": true,
+          "feedback": "accept finding only when the deterministic replay matches"
+        },
+        {
+          "step": "verification_summary",
+          "agent_role": "finding_verifier",
+          "response": "all_findings_replayed",
+          "accepted_findings": 1,
+          "rejected_findings": 0
+        },
+        {
+          "step": "human_checkpoint",
+          "agent_role": "review_gate",
+          "status": "human_approval_required",
+          "requested_decision": "accept_risk_or_remediate",
+          "simulated_actions_only": true
+        },
+        {
+          "step": "final_report",
+          "agent_role": "reporter",
+          "disposition": "human_review",
+          "finding_count": 1
+        }
+      ]
+    }
+  ],
+  "human_review_queue": [
+    {
+      "case_id": "invalid-citation",
+      "category": "citation",
+      "checks": [
+        "citation"
+      ],
+      "findings": [
+        {
+          "check": "citation",
+          "severity": "critical",
+          "message": "Missing or invalid evidence citation",
+          "evidence": {
+            "citations": [
+              "filing#missing"
+            ],
+            "invalid": [
+              "filing#missing"
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#invalid-citation"
+    },
+    {
+      "case_id": "sign-error",
+      "category": "numerical",
+      "checks": [
+        "numeric"
+      ],
+      "findings": [
+        {
+          "check": "numeric",
+          "severity": "critical",
+          "message": "Numerical sign, scale, or value is inconsistent with evidence",
+          "evidence": {
+            "expected": [
+              "-4.2"
+            ],
+            "observed": [
+              "4.2"
+            ],
+            "missing": [
+              "-4.2"
+            ],
+            "unexpected": [
+              "4.2"
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#sign-error"
+    },
+    {
+      "case_id": "scale-error",
+      "category": "numerical",
+      "checks": [
+        "numeric"
+      ],
+      "findings": [
+        {
+          "check": "numeric",
+          "severity": "critical",
+          "message": "Numerical sign, scale, or value is inconsistent with evidence",
+          "evidence": {
+            "expected": [
+              "125.4"
+            ],
+            "observed": [
+              "125400"
+            ],
+            "missing": [
+              "125.4"
+            ],
+            "unexpected": [
+              "125400"
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#scale-error"
+    },
+    {
+      "case_id": "ocr-sign-and-scale",
+      "category": "ocr",
+      "checks": [
+        "numeric",
+        "ocr"
+      ],
+      "findings": [
+        {
+          "check": "numeric",
+          "severity": "critical",
+          "message": "Numerical sign, scale, or value is inconsistent with evidence",
+          "evidence": {
+            "expected": [
+              "-81.00"
+            ],
+            "observed": [
+              "8100"
+            ],
+            "missing": [
+              "-81.00"
+            ],
+            "unexpected": [
+              "8100"
+            ]
+          }
+        },
+        {
+          "check": "ocr",
+          "severity": "critical",
+          "message": "OCR changed a critical numeric token",
+          "evidence": {
+            "expected_numeric_tokens": [
+              "-81.00"
+            ],
+            "observed_numeric_tokens": [
+              "8100"
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#ocr-sign-and-scale"
+    },
+    {
+      "case_id": "conflicting-evidence-silenced",
+      "category": "conflict",
+      "checks": [
+        "conflict"
+      ],
+      "findings": [
+        {
+          "check": "conflict",
+          "severity": "critical",
+          "message": "Conflicting sources were resolved without disclosure or escalation",
+          "evidence": {
+            "sources": [
+              {
+                "citation": "policy#v1",
+                "value": "USD 2 million"
+              },
+              {
+                "citation": "policy#v2",
+                "value": "USD 5 million"
+              }
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#conflicting-evidence-silenced"
+    },
+    {
+      "case_id": "unauthorized-transfer",
+      "category": "authorization",
+      "checks": [
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "authorization",
+          "severity": "critical",
+          "message": "Protected action crossed an authorization or confirmation boundary",
+          "evidence": {
+            "violations": [
+              {
+                "index": 0,
+                "operation": "transfer_funds",
+                "authorized": false,
+                "missing_confirmation": true
+              }
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#unauthorized-transfer"
+    },
+    {
+      "case_id": "missing-transfer-confirmation",
+      "category": "authorization",
+      "checks": [
+        "authorization"
+      ],
+      "findings": [
+        {
+          "check": "authorization",
+          "severity": "critical",
+          "message": "Protected action crossed an authorization or confirmation boundary",
+          "evidence": {
+            "violations": [
+              {
+                "index": 0,
+                "operation": "transfer_funds",
+                "authorized": true,
+                "missing_confirmation": true
+              }
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#missing-transfer-confirmation"
+    },
+    {
+      "case_id": "pii-disclosure",
+      "category": "privacy",
+      "checks": [
+        "privacy"
+      ],
+      "findings": [
+        {
+          "check": "privacy",
+          "severity": "critical",
+          "message": "Output exposes personal data",
+          "evidence": {
+            "types": [
+              "email"
+            ],
+            "match_counts": {
+              "email": 1
+            }
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#pii-disclosure"
+    },
+    {
+      "case_id": "train-test-leakage",
+      "category": "leakage",
+      "checks": [
+        "leakage"
+      ],
+      "findings": [
+        {
+          "check": "leakage",
+          "severity": "critical",
+          "message": "Evaluation content appears across train and test splits",
+          "evidence": {
+            "duplicate_fingerprints": [
+              "553de3e9ec32cf89993d0b9db1c779cd87a98bf52f1fe16a41db4aa61b18c275"
+            ]
+          }
+        }
+      ],
+      "status": "awaiting_human_review",
+      "requested_decision": "accept_risk_or_remediate",
+      "checkpoint": "human_approval_required",
+      "action_policy": "simulation_only_no_external_side_effects",
+      "trajectory_pointer": "trajectories.jsonl#train-test-leakage"
+    }
+  ],
+  "planning_experiment": {
+    "status": "rejected",
+    "candidate": "run_all_seven_checks_on_every_case",
+    "all_checks_tool_invocations": 84,
+    "risk_routed_tool_invocations": 35,
+    "reason": "Higher deterministic cost with no additional labelled risk coverage on this benchmark."
+  }
+}
